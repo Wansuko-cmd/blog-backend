@@ -9,5 +9,6 @@
 
 rootProject.name = "blog-backend"
 include("controller")
-include("service")
-include("repository")
+include("services", "services:article")
+include("repositories")
+include("entities")
