@@ -1,9 +1,9 @@
-package core
+package repository
 
 import entities.article.Article
 import value_object.common.PrimaryKey
 
-interface ArticleService {
+interface ArticleRepository {
 
     suspend fun getAll(): List<Article>
 

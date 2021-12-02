@@ -1,4 +1,4 @@
-package main.kotlin.exceptions
+package exceptions
 
 sealed class ReadServiceException(override val message: String) : Exception() {
 
