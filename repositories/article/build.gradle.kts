@@ -4,4 +4,5 @@ plugins {
 
 dependencies {
     implementation(project(":services:article"))
+    implementation(project(":repositories:utils"))
 }

@@ -1,15 +1,20 @@
 package repository
 
+import db.builder.H2
+import db.handler.readHandler
+import dsl.ArticleDslImpl
 import entities.article.Article
 import value_object.common.UniqueId
 
 class ArticleRepositoryImpl : ArticleRepository {
 
-    override suspend fun getAll(): List<Article> {
-        TODO("Not yet implemented")
+    private val articleDsl = ArticleDslImpl()
+
+    override suspend fun getAll(): List<Article> = readHandler(H2) {
+        articleDsl.getAll(this)
     }
 
-    override suspend fun getById(id: UniqueId): Article {
-        TODO("Not yet implemented")
+    override suspend fun getById(id: UniqueId): Article = readHandler(H2) {
+        articleDsl.getById(this, id)
     }
 }

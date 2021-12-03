@@ -14,6 +14,9 @@ subprojects {
         implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
         implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
 
+        //log
+        implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
+
         implementation(project(":domains"))
         implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.1")
     }

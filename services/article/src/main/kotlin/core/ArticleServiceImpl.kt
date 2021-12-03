@@ -6,7 +6,7 @@ import handler.readErrorHandler
 import repository.ArticleRepository
 import value_object.common.UniqueId
 
-class ArticleImpl(private val repository: ArticleRepository) : ArticleService {
+class ArticleServiceImpl(private val repository: ArticleRepository) : ArticleService {
 
     override suspend fun getAll(): List<Article> = readErrorHandler {
         repository.getAll()
