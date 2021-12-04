@@ -8,6 +8,7 @@ subprojects {
     apply(plugin = "kotlin")
 
     dependencies {
+
         //exposed
         implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
         implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
@@ -16,9 +17,5 @@ subprojects {
 
         //log
         implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
-
-        implementation(project(":domains"))
-        implementation(project(":databases:common"))
-        implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.1")
     }
 }

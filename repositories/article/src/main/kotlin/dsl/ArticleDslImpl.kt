@@ -1,6 +1,5 @@
 package dsl
 
-import db.tables.Articles
 import entities.article.Article
 import kotlinx.datetime.toKotlinLocalDateTime
 import org.jetbrains.exposed.sql.Database
@@ -8,6 +7,7 @@ import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
+import tables.Articles
 import value_object.article.ArticleBody
 import value_object.article.ArticleTitle
 import value_object.article.GoodCount

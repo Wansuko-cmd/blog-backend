@@ -1,9 +1,9 @@
 package db.builder
 
-import db.tables.Articles
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
+import tables.Articles
 
 val H2: Database by lazy {
     connectDatabase().apply { createTable() }
