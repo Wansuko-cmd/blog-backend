@@ -19,15 +19,23 @@ subprojects {
 
         implementation(project(":domains"))
         implementation(project(":databases:common"))
-        implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.1")
+
+        implementation(project(":services:utils"))
+
+        projectImplementation(":repositories:utils")
+
 
         //test
         //H2
         testImplementation("com.h2database:h2:1.4.200")
-        testImplementation(kotlin("test"))
     }
+}
 
-    tasks.test {
-        useJUnitPlatform()
+fun Project.projectImplementation(dependency: String) {
+
+    val projectDependency = project(dependency)
+
+    if(project != projectDependency.project) {
+        dependencies { implementation(projectDependency) }
     }
 }

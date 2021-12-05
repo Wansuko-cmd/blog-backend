@@ -9,13 +9,24 @@ subprojects {
 
     dependencies {
 
+        //log
+        implementation(project(":utils:log"))
+
         //exposed
         implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
         implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
         implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
         implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
 
-        //log
-        implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
+        projectImplementation(":databases:common")
+    }
+}
+
+fun Project.projectImplementation(dependency: String) {
+
+    val projectDependency = project(dependency)
+
+    if(project != projectDependency.project) {
+        dependencies { implementation(projectDependency) }
     }
 }

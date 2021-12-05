@@ -1,12 +1,11 @@
 package handler
 
-import mu.KotlinLogging
+import logger.errorLog
 
 inline fun <TClass: Any, Result> TClass.readErrorHandler(block: () -> Result): Result = try {
     block()
 } catch (e: Exception) {
-    val logger = KotlinLogging.logger {}
-    logger.error(e) { "Error Occurred in ${javaClass.simpleName}" }
+    errorLog(e, "Error occurred", mapOf("class" to javaClass.simpleName))
     throw e
 }
 

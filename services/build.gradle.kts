@@ -6,8 +6,20 @@ subprojects {
     apply(plugin = "kotlin")
 
     dependencies {
-        implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.1")
-        implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
+
+        //log
+        implementation(project(":utils:log"))
+
         implementation(project(":domains"))
+        projectImplementation(":services:utils")
+    }
+}
+
+fun Project.projectImplementation(dependency: String) {
+
+    val projectDependency = project(dependency)
+
+    if(project != projectDependency.project) {
+        dependencies { implementation(projectDependency) }
     }
 }
