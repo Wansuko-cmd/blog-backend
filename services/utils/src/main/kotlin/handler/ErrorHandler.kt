@@ -6,7 +6,7 @@ inline fun <TClass: Any, Result> TClass.readErrorHandler(block: () -> Result): R
     block()
 } catch (e: Exception) {
     val logger = KotlinLogging.logger {}
-    logger.error("Error Occurred in ${javaClass.simpleName}: $e")
+    logger.error(e) { "Error Occurred in ${javaClass.simpleName}" }
     throw e
 }
 

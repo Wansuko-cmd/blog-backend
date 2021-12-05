@@ -15,10 +15,19 @@ subprojects {
         implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
 
         //log
-        implementation("io.github.microutils:kotlin-logging-jvm:2.0.11")
+        implementation(project(":utils:log"))
 
         implementation(project(":domains"))
         implementation(project(":databases:common"))
         implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.1")
+
+        //test
+        //H2
+        testImplementation("com.h2database:h2:1.4.200")
+        testImplementation(kotlin("test"))
+    }
+
+    tasks.test {
+        useJUnitPlatform()
     }
 }
