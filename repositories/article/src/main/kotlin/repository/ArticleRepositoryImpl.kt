@@ -9,7 +9,7 @@ import value_object.common.UniqueId
 class ArticleRepositoryImpl(
     private val articleDsl: ArticleDsl,
     private vararg val databases: Database,
-    ) : ArticleRepository {
+) : ArticleRepository {
 
     override suspend fun getAll(): List<Article> = readDatabaseHandler(*databases) { database ->
         articleDsl.getAll(database)

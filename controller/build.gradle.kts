@@ -20,4 +20,8 @@ dependencies {
     implementation("io.ktor:ktor-server-netty:$ktorVersion")
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
+
+    implementation(project(":services:article"))
+    implementation(project(":repositories:article"))
+    implementation(project(":databases:h2"))
 }

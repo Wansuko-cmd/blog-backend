@@ -1,15 +1,13 @@
-package com.wsr.plugins
+package com.wsr.plugins.logger
 
-import io.ktor.features.*
-import org.slf4j.event.*
 import io.ktor.application.*
-import io.ktor.response.*
+import io.ktor.features.*
 import io.ktor.request.*
+import org.slf4j.event.Level
 
-fun Application.configureMonitoring() {
+fun Application.configureLogger() {
     install(CallLogging) {
         level = Level.INFO
         filter { call -> call.request.path().startsWith("/") }
     }
-
 }

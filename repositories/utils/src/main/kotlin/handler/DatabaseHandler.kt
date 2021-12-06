@@ -6,7 +6,10 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.name
 import org.jetbrains.exposed.sql.transactions.transaction
 
-inline fun <TClass: Any, Result> TClass.readDatabaseHandler(vararg databases: Database, block: (Database) -> Result): Result {
+inline fun <TClass: Any, Result> TClass.readDatabaseHandler(
+    vararg databases: Database,
+    block: (Database) -> Result
+): Result {
 
     for (database in databases) {
         try {
