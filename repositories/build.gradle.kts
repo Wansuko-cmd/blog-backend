@@ -17,7 +17,6 @@ subprojects {
         //log
         implementation(project(":utils:log"))
 
-        implementation(project(":domains"))
         implementation(project(":databases:common"))
 
         implementation(project(":services:utils"))

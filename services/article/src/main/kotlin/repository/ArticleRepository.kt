@@ -1,11 +1,10 @@
 package repository
 
-import entities.article.Article
-import value_object.common.UniqueId
+import boundary.ExternalArticle
 
 interface ArticleRepository {
 
-    suspend fun getAll(): List<Article>
+    suspend fun getAll(): List<ExternalArticle>
 
-    suspend fun getById(id: UniqueId): Article
+    suspend fun getById(id: String): ExternalArticle
 }

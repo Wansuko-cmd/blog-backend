@@ -8,7 +8,6 @@ import kotlinx.coroutines.runBlocking
 import mock.TestDatabase
 import mock.articleTestData
 import repository.ArticleRepositoryImpl
-import value_object.common.UniqueId
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -25,15 +24,15 @@ class ArticleRepositoryImplTest {
 
     @Test
     fun getByIdで特定のArticleを取得する() = runBlocking {
-        val uniqueId = UniqueId("UniqueId2")
-        val article = articleRepository.getById(uniqueId)
-        assertEquals(articleTestData.first { it.id == uniqueId }, article)
+        val id = "UniqueId2"
+        val article = articleRepository.getById(id)
+        assertEquals(articleTestData.first { it.id == id }, article)
     }
 
     @Test
     fun 見つからなければNotFoundExceptionを出す() = runBlocking {
-        val uniqueId = UniqueId("Not exist id")
-        assertFailsWith<ServiceException.NotFoundException> { articleRepository.getById(uniqueId) }
+        val id = "Not exist id"
+        assertFailsWith<ServiceException.NotFoundException> { articleRepository.getById(id) }
 
         return@runBlocking
     }

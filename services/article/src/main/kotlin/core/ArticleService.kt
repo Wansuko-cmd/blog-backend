@@ -1,18 +1,17 @@
 package core
 
-import entities.article.Article
+import boundary.ExternalArticle
 import enum.IsSuccess
-import value_object.common.UniqueId
 
 interface ArticleService {
 
-    suspend fun getAll(): List<Article>
+    suspend fun getAll(): List<ExternalArticle>
 
-    suspend fun getById(id: UniqueId): Article
+    suspend fun getById(id: String): ExternalArticle
 
-    suspend fun create(article: Article): IsSuccess
+    suspend fun create(article: ExternalArticle): IsSuccess
 
-    suspend fun update(article: Article): IsSuccess
+    suspend fun update(article: ExternalArticle): IsSuccess
 
-    suspend fun delete(id: UniqueId): IsSuccess
+    suspend fun delete(id: String): IsSuccess
 }

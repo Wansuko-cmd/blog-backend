@@ -1,7 +1,7 @@
 package mock
 
+import boundary.ExternalArticle
 import databases.DatabaseWrapper
-import entities.article.Article
 import kotlinx.datetime.toJavaLocalDateTime
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -33,16 +33,16 @@ private fun Database.createTable() {
     }
 }
 
-private fun Database.seeding(articles: List<Article>) {
+private fun Database.seeding(articles: List<ExternalArticle>) {
     transaction(this) {
-        articles.map { article ->
+        articles.map { externalArticle ->
             Articles.insert {
-                it[id] = article.id.value
-                it[title] = article.title.value
-                it[body] = article.body.value
-                it[goodCount] = article.goodCount.value
-                it[createdAt] = article.createdAt.toJavaLocalDateTime()
-                it[modifiedAt] = article.modifiedAt.toJavaLocalDateTime()
+                it[id] = externalArticle.id
+                it[title] = externalArticle.title
+                it[body] = externalArticle.body
+                it[goodCount] = externalArticle.goodCount
+                it[createdAt] = externalArticle.createdAt.toJavaLocalDateTime()
+                it[modifiedAt] = externalArticle.modifiedAt.toJavaLocalDateTime()
             }
         }
     }

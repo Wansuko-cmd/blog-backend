@@ -7,14 +7,13 @@ import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import kotlinx.coroutines.async
-import value_object.common.UniqueId
 
 fun Route.articleGetRoute(articleService: ArticleService) {
     getRouteHandler {
         val articles = async {
             articleService
                 .getAll()
-                .map { ArticleGetResponse.fromArticle(it) }
+                .map { ArticleGetResponse.fromExternalArticle(it) }
         }
         proceed()
         call.respond(articles.await())
@@ -24,7 +23,7 @@ fun Route.articleGetRoute(articleService: ArticleService) {
         val id = call.parameters["id"] ?: return@getRouteHandler  call.respond(HttpStatusCode.BadRequest)
         val article = async {
             ArticleGetResponse
-                .fromArticle(articleService.getById(UniqueId(id)))
+                .fromExternalArticle(articleService.getById(id))
         }
         proceed()
         call.respond(article.await())

@@ -1,10 +1,9 @@
 package dsl
 
-import entities.article.Article
+import boundary.ExternalArticle
 import org.jetbrains.exposed.sql.Database
-import value_object.common.UniqueId
 
 interface ArticleDsl {
-    fun getAll(database: Database): List<Article>
-    fun getById(database: Database, id: UniqueId): Article
+    fun getAll(database: Database): List<ExternalArticle>
+    fun getById(database: Database, id: String): ExternalArticle
 }

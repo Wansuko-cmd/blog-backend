@@ -20,8 +20,6 @@ subprojects {
 
         implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.0")
 
-        implementation(project(":domains"))
-
         projectImplementation(":databases:common")
     }
 }

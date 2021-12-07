@@ -9,4 +9,6 @@ dependencies {
 
     implementation(project(":databases:dev"))
     implementation(project(":services:utils"))
+
+    testImplementation(project(":domains"))
 }

@@ -1,45 +1,41 @@
 package mock
 
-import entities.article.Article
+import boundary.ExternalArticle
 import kotlinx.datetime.LocalDateTime
-import value_object.article.ArticleBody
-import value_object.article.ArticleTitle
-import value_object.article.GoodCount
-import value_object.common.UniqueId
 
 val time = LocalDateTime.parse("2005-05-05T15:00:00")
 
 val articleTestData = listOf(
-    Article(
-        UniqueId("UniqueId1"),
-        ArticleTitle("Title1"),
-        ArticleBody("Body1"),
-        GoodCount(1),
+    ExternalArticle(
+        "UniqueId1",
+        "Title1",
+        "Body1",
+        1,
         time,
         time,
     ),
-    Article(
-        UniqueId("UniqueId2"),
-        ArticleTitle("Title2"),
-        ArticleBody("Body2"),
-        GoodCount(2),
+    ExternalArticle(
+        "UniqueId2",
+        "Title2",
+        "Body2",
+        2,
         time,
         time,
     ),
-    Article(
-        UniqueId("UniqueId3"),
-        ArticleTitle("Title3"),
-        ArticleBody("Body3"),
-        GoodCount(3),
+    ExternalArticle(
+        "UniqueId3",
+        "Title3",
+        "Body3",
+        3,
         time,
         time,
     ),
-    Article(
-        UniqueId("UniqueId4"),
-        ArticleTitle("Title4"),
-        ArticleBody("Body4"),
-        GoodCount(4),
+    ExternalArticle(
+        "UniqueId4",
+        "Title4",
+        "Body4",
+        4,
         time,
         time,
-    )
+    ),
 )

@@ -1,30 +1,29 @@
 package core
 
-import entities.article.Article
+import boundary.ExternalArticle
 import enum.IsSuccess
 import handler.readErrorHandler
 import repository.ArticleRepository
-import value_object.common.UniqueId
 
 class ArticleServiceImpl(private val repository: ArticleRepository) : ArticleService {
 
-    override suspend fun getAll(): List<Article> = readErrorHandler {
+    override suspend fun getAll(): List<ExternalArticle> = readErrorHandler {
         repository.getAll()
     }
 
-    override suspend fun getById(id: UniqueId): Article = readErrorHandler {
+    override suspend fun getById(id: String): ExternalArticle = readErrorHandler {
         repository.getById(id)
     }
 
-    override suspend fun create(article: Article): IsSuccess {
+    override suspend fun create(article: ExternalArticle): IsSuccess {
         TODO("Not yet implemented")
     }
 
-    override suspend fun update(article: Article): IsSuccess {
+    override suspend fun update(article: ExternalArticle): IsSuccess {
         TODO("Not yet implemented")
     }
 
-    override suspend fun delete(id: UniqueId): IsSuccess {
+    override suspend fun delete(id: String): IsSuccess {
         TODO("Not yet implemented")
     }
 }

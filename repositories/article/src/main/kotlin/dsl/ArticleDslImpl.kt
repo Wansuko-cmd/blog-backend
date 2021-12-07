@@ -1,6 +1,6 @@
 package dsl
 
-import entities.article.Article
+import boundary.ExternalArticle
 import kotlinx.datetime.toKotlinLocalDateTime
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.ResultRow
@@ -8,30 +8,26 @@ import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import tables.Articles
-import value_object.article.ArticleBody
-import value_object.article.ArticleTitle
-import value_object.article.GoodCount
-import value_object.common.UniqueId
 
 class ArticleDslImpl : ArticleDsl {
 
-    override fun getAll(database: Database): List<Article> = transaction(database) {
+    override fun getAll(database: Database): List<ExternalArticle> = transaction(database) {
         Articles.selectAll()
             .orderBy(Articles.createdAt)
-            .map { it.toArticle() }
+            .map { it.toExternalArticle() }
     }
 
-    override fun getById(database: Database, id: UniqueId): Article = transaction(database) {
-        Articles.select { Articles.id eq id.value }
+    override fun getById(database: Database, id: String): ExternalArticle = transaction(database) {
+        Articles.select { Articles.id eq id }
             .first()
-            .toArticle()
+            .toExternalArticle()
     }
 
-    private fun ResultRow.toArticle() = Article(
-        UniqueId(this[Articles.id]),
-        ArticleTitle(this[Articles.title]),
-        ArticleBody(this[Articles.body]),
-        GoodCount(this[Articles.goodCount]),
+    private fun ResultRow.toExternalArticle() = ExternalArticle(
+        this[Articles.id],
+        this[Articles.title],
+        this[Articles.body],
+        this[Articles.goodCount],
         this[Articles.createdAt].toKotlinLocalDateTime(),
         this[Articles.modifiedAt].toKotlinLocalDateTime()
     )

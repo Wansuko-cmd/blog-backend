@@ -1,6 +1,6 @@
 package com.wsr.routing.articles.get
 
-import entities.article.Article
+import boundary.ExternalArticle
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -15,14 +15,14 @@ data class ArticleGetResponse(
     @SerialName("modified_at") val modifiedAt: LocalDateTime,
 ){
     companion object {
-        fun fromArticle(article: Article): ArticleGetResponse {
+        fun fromExternalArticle(externalArticle: ExternalArticle): ArticleGetResponse {
             return ArticleGetResponse(
-                article.id.value,
-                article.title.value,
-                article.body.value,
-                article.goodCount.value,
-                article.createdAt,
-                article.modifiedAt
+                externalArticle.id,
+                externalArticle.title,
+                externalArticle.body,
+                externalArticle.goodCount,
+                externalArticle.createdAt,
+                externalArticle.modifiedAt
             )
         }
     }
