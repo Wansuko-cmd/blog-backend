@@ -22,7 +22,6 @@ inline fun <TClass: Any, Result> TClass.readDatabaseHandler(
         }
     }
 
-
     val exception = ServiceException.DatabaseErrorException()
     errorLog(exception, "全てのデータベースで読み取り失敗", mapOf("repository" to javaClass.simpleName))
     throw exception

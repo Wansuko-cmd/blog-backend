@@ -3,6 +3,7 @@ package com.wsr.plugins.koin
 import core.ArticleService
 import core.ArticleServiceImpl
 import db.builder.DevH2
+import db.builder.H2
 import dsl.ArticleDsl
 import dsl.ArticleDslImpl
 import io.ktor.application.*
@@ -13,9 +14,11 @@ import repository.ArticleRepositoryImpl
 
 fun Application.configureKoin() {
 
+    val h2 = H2(DevH2)
+
     val module = module {
         factory<ArticleService> { ArticleServiceImpl(get()) }
-        factory<ArticleRepository> { ArticleRepositoryImpl(get(), DevH2) }
+        factory<ArticleRepository> { ArticleRepositoryImpl(get(), h2) }
         factory<ArticleDsl> { ArticleDslImpl() }
     }
 

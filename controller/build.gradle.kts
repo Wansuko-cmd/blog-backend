@@ -32,6 +32,7 @@ dependencies {
 
     implementation(project(":databases:common"))
     implementation(project(":databases:dev"))
+    implementation(project(":databases:h2"))
 
     implementation(project(":domains"))
 }

@@ -22,7 +22,10 @@ fun Route.articleGetRoute(articleService: ArticleService) {
 
     getRouteHandler("{id}") {
         val id = call.parameters["id"] ?: return@getRouteHandler  call.respond(HttpStatusCode.BadRequest)
-        val article = async { ArticleGetResponse.fromArticle(articleService.getById(UniqueId(id))) }
+        val article = async {
+            ArticleGetResponse
+                .fromArticle(articleService.getById(UniqueId(id)))
+        }
         proceed()
         call.respond(article.await())
     }
