@@ -1,6 +1,6 @@
 package dsl
 
-import boundary.ExternalArticle
+import external.ExternalArticle
 import org.jetbrains.exposed.sql.Database
 
 interface ArticleDsl {

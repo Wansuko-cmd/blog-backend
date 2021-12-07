@@ -1,6 +1,6 @@
 package repository
 
-import boundary.ExternalArticle
+import external.ExternalArticle
 
 interface ArticleRepository {
 

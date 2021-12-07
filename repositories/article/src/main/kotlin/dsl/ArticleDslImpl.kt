@@ -1,6 +1,6 @@
 package dsl
 
-import boundary.ExternalArticle
+import external.ExternalArticle
 import kotlinx.datetime.toKotlinLocalDateTime
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.ResultRow

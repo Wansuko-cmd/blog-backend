@@ -1,6 +1,6 @@
 package mock
 
-import boundary.ExternalArticle
+import external.ExternalArticle
 import databases.DatabaseWrapper
 import kotlinx.datetime.toJavaLocalDateTime
 import org.jetbrains.exposed.sql.Database

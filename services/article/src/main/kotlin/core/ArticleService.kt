@@ -1,6 +1,6 @@
 package core
 
-import boundary.ExternalArticle
+import external.ExternalArticle
 import enum.IsSuccess
 
 interface ArticleService {

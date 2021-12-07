@@ -1,6 +1,6 @@
 package repository
 
-import boundary.ExternalArticle
+import external.ExternalArticle
 import databases.DatabaseWrapper
 import dsl.ArticleDsl
 import handler.readDatabaseHandler
