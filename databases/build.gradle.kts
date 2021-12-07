@@ -18,6 +18,8 @@ subprojects {
         implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
         implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
 
+        implementation(project(":domains"))
+
         projectImplementation(":databases:common")
     }
 }

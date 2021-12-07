@@ -7,22 +7,22 @@ import io.ktor.util.pipeline.*
 import kotlinx.coroutines.coroutineScope
 
 fun Route.getRouteHandler(
-    path: String = "/",
+    path: String = "",
     body: PipelineInterceptor<Unit, ApplicationCall>
 ): Route = route(path, HttpMethod.Get) { handle(baseRouteBody(body)) }
 
 fun Route.postRouteHandler(
-    path: String = "/",
+    path: String = "",
     body: PipelineInterceptor<Unit, ApplicationCall>
 ): Route = route(path, HttpMethod.Post) { handle(baseRouteBody(body)) }
 
 fun Route.putRouteHandler(
-    path: String = "/",
+    path: String = "",
     body: PipelineInterceptor<Unit, ApplicationCall>
 ): Route = route(path, HttpMethod.Put) { handle(baseRouteBody(body)) }
 
 fun Route.deleteRouteHandler(
-    path: String = "/",
+    path: String = "",
     body: PipelineInterceptor<Unit, ApplicationCall>
 ): Route = route(path, HttpMethod.Delete) { handle(baseRouteBody(body)) }
 

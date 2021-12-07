@@ -1,14 +1,14 @@
 package repository
 
+import databases.DatabaseWrapper
 import dsl.ArticleDsl
 import entities.article.Article
 import handler.readDatabaseHandler
-import org.jetbrains.exposed.sql.Database
 import value_object.common.UniqueId
 
 class ArticleRepositoryImpl(
     private val articleDsl: ArticleDsl,
-    private vararg val databases: Database,
+    private vararg val databases: DatabaseWrapper,
 ) : ArticleRepository {
 
     override suspend fun getAll(): List<Article> = readDatabaseHandler(*databases) { database ->

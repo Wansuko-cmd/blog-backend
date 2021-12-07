@@ -16,16 +16,16 @@ class ReadDatabaseHandlerTest {
     @Test
     fun 前から順番にデータの取得を試みる() {
         val usedDatabase = readDatabaseHandler(TestDatabase1, TestDatabase2, TestDatabase3) {
-            if(it == TestDatabase3) it else throw Exception()
+            if(it == TestDatabase3.instance) it else throw Exception()
         }
-        assertEquals(TestDatabase3, usedDatabase)
+        assertEquals(TestDatabase3.instance, usedDatabase)
     }
 
     @Test
     fun 要素が見つからなければ即座にNotFoundExceptionを投げる() {
         assertFailsWith<ServiceException.NotFoundException> {
             readDatabaseHandler(TestDatabase1, TestDatabase2, TestDatabase3) {
-                if(it == TestDatabase3) return else throw NoSuchElementException()
+                if(it == TestDatabase3.instance) return else throw NoSuchElementException()
             }
         }
     }

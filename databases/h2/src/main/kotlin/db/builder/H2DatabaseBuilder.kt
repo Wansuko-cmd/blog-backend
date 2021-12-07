@@ -1,16 +1,17 @@
 package db.builder
 
+import databases.DatabaseWrapper
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import tables.Articles
 
-val H2: Database by lazy {
-    connectDatabase().apply { createTable() }
+val H2: DatabaseWrapper by lazy {
+    DatabaseWrapper(connectDatabase().apply { createTable() })
 }
 
 private fun connectDatabase(): Database {
     return Database.connect(
-        "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1",
+        "jdbc:h2:mem:product_db;DB_CLOSE_DELAY=-1",
         driver = "org.h2.Driver",
         user = "",
         password = ""
