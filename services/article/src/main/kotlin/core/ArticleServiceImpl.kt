@@ -1,9 +1,14 @@
 package core
 
-import external.ExternalArticle
+import entities.article.Article
 import enum.IsSuccess
+import external.ExternalArticle
+import external.toExternalArticle
 import handler.readErrorHandler
+import handler.writeErrorHandler
 import repository.ArticleRepository
+import value_object.article.ArticleBody
+import value_object.article.ArticleTitle
 
 class ArticleServiceImpl(private val repository: ArticleRepository) : ArticleService {
 
@@ -15,11 +20,15 @@ class ArticleServiceImpl(private val repository: ArticleRepository) : ArticleSer
         repository.getById(id)
     }
 
-    override suspend fun create(article: ExternalArticle): IsSuccess {
-        TODO("Not yet implemented")
+    override suspend fun create(title: String, body: String): IsSuccess = writeErrorHandler{
+        val articleTitle = ArticleTitle(title)
+        val articleBody = ArticleBody(body)
+
+        val article = Article(articleTitle, articleBody)
+        repository.insert(article.toExternalArticle())
     }
 
-    override suspend fun update(article: ExternalArticle): IsSuccess {
+    override suspend fun update(title: String, body: String, goodCount: Int): IsSuccess {
         TODO("Not yet implemented")
     }
 

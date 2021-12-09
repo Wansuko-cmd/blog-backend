@@ -1,7 +1,7 @@
 package core
 
-import external.ExternalArticle
 import enum.IsSuccess
+import external.ExternalArticle
 
 interface ArticleService {
 
@@ -9,9 +9,9 @@ interface ArticleService {
 
     suspend fun getById(id: String): ExternalArticle
 
-    suspend fun create(article: ExternalArticle): IsSuccess
+    suspend fun create(title: String, body: String): IsSuccess
 
-    suspend fun update(article: ExternalArticle): IsSuccess
+    suspend fun update(title: String, body: String, goodCount: Int): IsSuccess
 
     suspend fun delete(id: String): IsSuccess
 }

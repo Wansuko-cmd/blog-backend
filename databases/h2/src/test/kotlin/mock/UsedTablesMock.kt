@@ -13,10 +13,10 @@ import value_object.common.UniqueId
 val usedTablesMock = listOf<Table>(Articles)
 
 fun ResultRow.toArticle() = Article(
-    UniqueId(this[Articles.id]),
     ArticleTitle(this[Articles.title]),
     ArticleBody(this[Articles.body]),
     GoodCount(this[Articles.goodCount]),
     this[Articles.createdAt].toKotlinLocalDateTime(),
-    this[Articles.modifiedAt].toKotlinLocalDateTime()
+    this[Articles.modifiedAt].toKotlinLocalDateTime(),
+    UniqueId(this[Articles.id]),
 )

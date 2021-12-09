@@ -7,9 +7,6 @@ subprojects {
 
     dependencies {
 
-        //log
-        implementation(project(":utils:log"))
-
         implementation(project(":domains"))
         projectImplementation(":services:utils")
     }

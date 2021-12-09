@@ -13,11 +13,7 @@ subprojects {
 
     dependencies {
 
-        //log
-        projectImplementation(":utils:log")
-
-        //datetime
-        implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.1")
+        projectImplementation(":utils")
 
         //test
         testImplementation(kotlin("test"))

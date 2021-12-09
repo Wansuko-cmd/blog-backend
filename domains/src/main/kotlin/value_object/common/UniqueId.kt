@@ -1,3 +1,5 @@
 package value_object.common
 
-data class UniqueId (val value: String)
+import java.util.*
+
+data class UniqueId (val value: String = UUID.randomUUID().toString())

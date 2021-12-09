@@ -9,9 +9,6 @@ subprojects {
 
     dependencies {
 
-        //log
-        implementation(project(":utils:log"))
-
         //exposed
         implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
         implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")

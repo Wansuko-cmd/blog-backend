@@ -1,7 +1,7 @@
 package mock
 
-import external.ExternalArticle
 import databases.DatabaseWrapper
+import external.ExternalArticle
 import kotlinx.datetime.toJavaLocalDateTime
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
