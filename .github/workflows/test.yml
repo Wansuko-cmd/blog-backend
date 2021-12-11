@@ -40,10 +40,3 @@ jobs:
       - name: テストを実行
         run: |
           ${{ github.workspace }}/gradlew test
-
-
-      - name: テスト結果を表示
-        uses: actions/upload-artifact@v1.0.0
-        with:
-          name: test-result-${{ matrix.os }}
-          path: build/reports/tests
