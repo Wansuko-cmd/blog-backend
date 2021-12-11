@@ -23,6 +23,11 @@ jobs:
           java-version: 11
 
 
+      - name: ./gradlewに権限を付与
+        run: |
+          chmod 777 ${{ github.workspace }}/gradlew
+
+
       - name: テストを実行
         run: |
-          ./gradlew test
+          ${{ github.workspace }}/gradlew test
