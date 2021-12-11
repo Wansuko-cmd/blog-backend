@@ -2,6 +2,7 @@ package handler
 
 import databases.DatabaseWrapper
 import enum.IsSuccess
+import exceptions.RepositoryException
 import exceptions.ServiceException
 import logger.errorLog
 import org.jetbrains.exposed.sql.Database
@@ -17,7 +18,7 @@ fun <TClass: Any, Result> TClass.readDatabaseHandler(
         try {
             return block(database.instance)
         } catch (e: NoSuchElementException) {
-            throw ServiceException.NotFoundException()
+            throw RepositoryException.NotFoundException()
         } catch (e: Exception) {
             errorLog(
                 e,
@@ -31,7 +32,7 @@ fun <TClass: Any, Result> TClass.readDatabaseHandler(
         }
     }
 
-    val exception = ServiceException.DatabaseErrorException()
+    val exception = RepositoryException.DatabaseErrorException()
     errorLog(exception, "全てのデータベースで読み取り失敗", mapOf("repository" to javaClass.simpleName))
     throw exception
 }
@@ -49,6 +50,6 @@ fun <TClass: Any> TClass.writeDatabasesHandler(
             "repository" to this.javaClass.simpleName,
             "block" to block.javaClass.toString(),
         ))
-        throw ServiceException.DatabaseErrorException()
+        throw RepositoryException.DatabaseErrorException()
     }
 }

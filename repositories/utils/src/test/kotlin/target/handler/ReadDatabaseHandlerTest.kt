@@ -2,6 +2,7 @@
 
 package target.handler
 
+import exceptions.RepositoryException
 import exceptions.ServiceException
 import handler.readDatabaseHandler
 import mock.TestDatabase1
@@ -25,7 +26,7 @@ class ReadDatabaseHandlerTest {
 
     @Test
     fun 要素が見つからなければ即座にNotFoundExceptionを投げる() {
-        assertFailsWith<ServiceException.NotFoundException> {
+        assertFailsWith<RepositoryException.NotFoundException> {
             readDatabaseHandler(*databases) {
                 if(it == TestDatabase3.instance) return@readDatabaseHandler else throw NoSuchElementException()
             }
@@ -34,7 +35,7 @@ class ReadDatabaseHandlerTest {
 
     @Test
     fun 全てのデータベースでエラーが起きればDatabaseErrorExceptionを投げる() {
-        assertFailsWith<ServiceException.DatabaseErrorException> {
+        assertFailsWith<RepositoryException.DatabaseErrorException> {
             readDatabaseHandler(*databases) { throw Exception() }
         }
     }

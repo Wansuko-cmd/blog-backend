@@ -1,4 +1,4 @@
-package value_object.common
+package value_objects.common
 
 import java.util.*
 

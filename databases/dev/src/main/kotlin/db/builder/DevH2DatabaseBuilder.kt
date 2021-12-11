@@ -9,10 +9,10 @@ import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.batchInsert
 import org.jetbrains.exposed.sql.transactions.transaction
 import tables.Articles
-import value_object.article.ArticleBody
-import value_object.article.ArticleTitle
-import value_object.article.GoodCount
-import value_object.common.UniqueId
+import value_objects.article.ArticleBody
+import value_objects.article.ArticleTitle
+import value_objects.article.GoodCount
+import value_objects.common.UniqueId
 
 val DevH2: DatabaseWrapper by lazy {
     DatabaseWrapper(

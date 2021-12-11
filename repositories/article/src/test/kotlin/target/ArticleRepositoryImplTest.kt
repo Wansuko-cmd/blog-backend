@@ -3,7 +3,7 @@
 package target
 
 import dsl.ArticleDslImpl
-import exceptions.ServiceException
+import exceptions.RepositoryException
 import kotlinx.coroutines.runBlocking
 import mock.TestDatabase
 import mock.articleTestData
@@ -32,7 +32,7 @@ class ArticleRepositoryImplTest {
     @Test
     fun 見つからなければNotFoundExceptionを出す() = runBlocking {
         val id = "Not exist id"
-        assertFailsWith<ServiceException.NotFoundException> { articleRepository.getById(id) }
+        assertFailsWith<RepositoryException.NotFoundException> { articleRepository.getById(id) }
 
         return@runBlocking
     }
