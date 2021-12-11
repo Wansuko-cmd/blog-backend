@@ -29,7 +29,11 @@ jobs:
           java-version: 11
 
 
+      - name: ./gradlewに権限を付与
+        run: |
+          chmod 777 ${{ github.workspace }}/gradlew
+
+
       - name: テストを実行
-        uses: eskatos/gradle-command-action@v1
-        with:
-          arguments: test
+        run: |
+          ${{ github.workspace }}/gradlew test
