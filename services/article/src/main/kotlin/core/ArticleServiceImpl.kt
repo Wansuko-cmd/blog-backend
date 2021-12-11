@@ -7,8 +7,8 @@ import external.toExternalArticle
 import handler.readErrorHandler
 import handler.writeErrorHandler
 import repository.ArticleRepository
-import value_object.article.ArticleBody
-import value_object.article.ArticleTitle
+import value_objects.article.ArticleBody
+import value_objects.article.ArticleTitle
 
 class ArticleServiceImpl(private val repository: ArticleRepository) : ArticleService {
 

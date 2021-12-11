@@ -24,6 +24,10 @@ subprojects {
         //test
         //H2
         testImplementation("com.h2database:h2:1.4.200")
+
+        implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.0")
+
+        implementation("com.zaxxer:HikariCP:5.0.0")
     }
 }
 

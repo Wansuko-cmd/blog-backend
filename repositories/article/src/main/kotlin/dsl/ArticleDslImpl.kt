@@ -1,13 +1,12 @@
 package dsl
 
 import external.ExternalArticle
+import kotlinx.datetime.toJavaLocalDateTime
 import kotlinx.datetime.toKotlinLocalDateTime
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import tables.Articles
+import transaction.writeTransaction
 
 class ArticleDslImpl : ArticleDsl {
 
@@ -22,6 +21,19 @@ class ArticleDslImpl : ArticleDsl {
             .first()
             .toExternalArticle()
     }
+
+    override fun insert(database: Database, externalArticle: ExternalArticle) =
+        writeTransaction(database) {
+            Articles.insert {
+                it[id] = externalArticle.id
+                it[title] = externalArticle.title
+                it[body] = externalArticle.body
+                it[goodCount] = externalArticle.goodCount
+                it[createdAt] = externalArticle.createdAt.toJavaLocalDateTime()
+                it[modifiedAt] = externalArticle.modifiedAt.toJavaLocalDateTime()
+            }
+        }
+
 
     private fun ResultRow.toExternalArticle() = ExternalArticle(
         this[Articles.id],
