@@ -13,9 +13,11 @@ import kotlin.test.assertFailsWith
 
 class ReadDatabaseHandlerTest {
 
+    private val databases = arrayOf(TestDatabase1, TestDatabase2, TestDatabase3)
+
     @Test
     fun 前から順番にデータの取得を試みる() {
-        val usedDatabase = readDatabaseHandler(TestDatabase1, TestDatabase2, TestDatabase3) {
+        val usedDatabase = readDatabaseHandler(*databases) {
             if(it == TestDatabase3.instance) it else throw Exception()
         }
         assertEquals(TestDatabase3.instance, usedDatabase)
@@ -24,8 +26,8 @@ class ReadDatabaseHandlerTest {
     @Test
     fun 要素が見つからなければ即座にNotFoundExceptionを投げる() {
         assertFailsWith<ServiceException.NotFoundException> {
-            readDatabaseHandler(TestDatabase1, TestDatabase2, TestDatabase3) {
-                if(it == TestDatabase3.instance) return else throw NoSuchElementException()
+            readDatabaseHandler(*databases) {
+                if(it == TestDatabase3.instance) return@readDatabaseHandler else throw NoSuchElementException()
             }
         }
     }
@@ -33,7 +35,7 @@ class ReadDatabaseHandlerTest {
     @Test
     fun 全てのデータベースでエラーが起きればDatabaseErrorExceptionを投げる() {
         assertFailsWith<ServiceException.DatabaseErrorException> {
-            readDatabaseHandler(TestDatabase1, TestDatabase2, TestDatabase3) { throw Exception() }
+            readDatabaseHandler(*databases) { throw Exception() }
         }
     }
 }
