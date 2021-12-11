@@ -17,6 +17,15 @@ jobs:
       - name: 現ブランチからチェックアウト
         uses: actions/checkout@v2
 
+
+      - name: gradleのライブラリ群をキャッシュ
+        uses: actions/cache@preview
+        with:
+          path: "~/.gradle/caches"
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/build.gradle.kts') }}
+          restore-keys: ${{ runner.os }}-gradle-
+
+
       - name: Javaのセットアップ
         uses: actions/setup-java@v1
         with:
@@ -31,3 +40,10 @@ jobs:
       - name: テストを実行
         run: |
           ${{ github.workspace }}/gradlew test
+
+
+      - name: テスト結果を表示
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: test-result-${{ matrix.os }}
+          path: build/reports/tests
