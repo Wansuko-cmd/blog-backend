@@ -20,7 +20,7 @@ class ArticleRepositoryImplGetTest {
     @Test
     fun getAllで全てのArticleを取得する() = runBlocking {
         val articles = articleRepository.getAll()
-        assertEquals(listOf(), articles)
+        assertEquals(TestData, articles)
     }
 
     @Test
