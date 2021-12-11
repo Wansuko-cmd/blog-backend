@@ -13,7 +13,7 @@ val TestDatabase by lazy {
     DatabaseWrapper(
         connectDatabase().apply {
             createTable()
-            seeding(articleTestData)
+            seeding(TestData)
         }
     )
 }
@@ -33,7 +33,7 @@ private fun Database.createTable() {
     }
 }
 
-private fun Database.seeding(articles: List<ExternalArticle>) {
+fun Database.seeding(articles: List<ExternalArticle>) {
     transaction(this) {
         articles.map { externalArticle ->
             Articles.insert {

@@ -26,4 +26,9 @@ class ArticleRepositoryImpl(
         writeDatabasesHandler(*databases) { database ->
             articleDsl.insert(database, externalArticle)
         }
+
+    override suspend fun update(externalArticle: ExternalArticle): IsSuccess =
+        writeDatabasesHandler(*databases) { database ->
+            articleDsl.update(database, externalArticle)
+        }
 }

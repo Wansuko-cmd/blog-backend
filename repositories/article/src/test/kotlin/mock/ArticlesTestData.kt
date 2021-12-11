@@ -5,7 +5,7 @@ import kotlinx.datetime.LocalDateTime
 
 val time = LocalDateTime.parse("2005-05-05T15:00:00")
 
-val articleTestData = listOf(
+val TestData = listOf(
     ExternalArticle(
         "UniqueId1",
         "Title1",

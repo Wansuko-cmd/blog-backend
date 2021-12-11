@@ -10,4 +10,6 @@ interface ArticleRepository {
     suspend fun getById(id: String): ExternalArticle
 
     suspend fun insert(externalArticle: ExternalArticle): IsSuccess
+
+    suspend fun update(externalArticle: ExternalArticle): IsSuccess
 }

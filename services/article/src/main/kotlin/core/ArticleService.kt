@@ -11,7 +11,7 @@ interface ArticleService {
 
     suspend fun create(title: String, body: String): IsSuccess
 
-    suspend fun update(title: String, body: String, goodCount: Int): IsSuccess
+    suspend fun update(id: String, title: String? = null, body: String? = null, goodCount: Int? = null): IsSuccess
 
     suspend fun delete(id: String): IsSuccess
 }

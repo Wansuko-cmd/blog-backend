@@ -34,6 +34,17 @@ class ArticleDslImpl : ArticleDsl {
         }
     }
 
+    override fun update(database: Database, externalArticle: ExternalArticle) {
+        transaction(database) {
+            Articles.update({ Articles.id eq externalArticle.id }) {
+                it[title] = externalArticle.title
+                it[body] = externalArticle.body
+                it[goodCount] = externalArticle.goodCount
+                it[modifiedAt] = externalArticle.modifiedAt.toJavaLocalDateTime()
+            }
+        }
+    }
+
     private fun ResultRow.toExternalArticle() = ExternalArticle(
         this[Articles.id],
         this[Articles.title],
