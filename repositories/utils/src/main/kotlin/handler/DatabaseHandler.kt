@@ -45,6 +45,8 @@ fun <TClass: Any> TClass.writeDatabasesHandler(
         transaction { databases.forEach { block(it.instance) } }
 
         return IsSuccess.Success
+    } catch (e: NoSuchElementException) {
+        throw RepositoryException.NotFoundException()
     } catch (e: Exception) {
         errorLog(e, "データベースの書き込み失敗", mapOf(
             "repository" to this.javaClass.simpleName,

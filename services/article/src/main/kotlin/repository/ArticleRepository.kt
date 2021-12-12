@@ -12,4 +12,6 @@ interface ArticleRepository {
     suspend fun insert(externalArticle: ExternalArticle): IsSuccess
 
     suspend fun update(externalArticle: ExternalArticle): IsSuccess
+
+    suspend fun delete(id: String): IsSuccess
 }

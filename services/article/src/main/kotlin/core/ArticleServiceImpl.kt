@@ -30,7 +30,12 @@ class ArticleServiceImpl(private val repository: ArticleRepository) : ArticleSer
         repository.insert(article.toExternalArticle())
     }
 
-    override suspend fun update(id: String, title: String?, body: String?, goodCount: Int?): IsSuccess = writeErrorHandler {
+    override suspend fun update(
+        id: String,
+        title: String?,
+        body: String?,
+        goodCount: Int?
+    ): IsSuccess = writeErrorHandler {
 
         val oldArticle = repository.getById(id)
 
@@ -49,7 +54,9 @@ class ArticleServiceImpl(private val repository: ArticleRepository) : ArticleSer
         repository.update(newArticle.toExternalArticle())
     }
 
-    override suspend fun delete(id: String): IsSuccess {
-        TODO("Not yet implemented")
+    override suspend fun delete(id: String): IsSuccess = writeErrorHandler {
+        val uniqueId = UniqueId(id)
+
+        repository.delete(uniqueId.value)
     }
 }

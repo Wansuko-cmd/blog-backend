@@ -31,4 +31,9 @@ class ArticleRepositoryImpl(
         writeDatabasesHandler(*databases) { database ->
             articleDsl.update(database, externalArticle)
         }
+
+    override suspend fun delete(id: String): IsSuccess =
+        writeDatabasesHandler(*databases) { database ->
+            articleDsl.delete(database, id)
+        }
 }

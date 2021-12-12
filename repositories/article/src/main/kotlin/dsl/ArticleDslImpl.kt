@@ -1,5 +1,6 @@
 package dsl
 
+import exceptions.RepositoryException
 import external.ExternalArticle
 import kotlinx.datetime.toJavaLocalDateTime
 import kotlinx.datetime.toKotlinLocalDateTime
@@ -35,13 +36,27 @@ class ArticleDslImpl : ArticleDsl {
     }
 
     override fun update(database: Database, externalArticle: ExternalArticle) {
-        transaction(database) {
-            Articles.update({ Articles.id eq externalArticle.id }) {
+        val updated = transaction(database) {
+            Articles.update({ Articles.id eq externalArticle.id }, limit = 1) {
                 it[title] = externalArticle.title
                 it[body] = externalArticle.body
                 it[goodCount] = externalArticle.goodCount
                 it[modifiedAt] = externalArticle.modifiedAt.toJavaLocalDateTime()
             }
+        }
+        when {
+            updated < 1 -> throw NoSuchElementException()
+            1 < updated -> throw RepositoryException.DatabaseErrorException("Articleにて2つ以上のカラムを更新")
+        }
+    }
+
+    override fun delete(database: Database, id: String) {
+        val deleted = transaction(database) {
+            Articles.deleteWhere(limit = 1) { Articles.id eq id }
+        }
+        when {
+            deleted < 1 -> throw NoSuchElementException()
+            1 < deleted -> throw RepositoryException.DatabaseErrorException("Articleにて2つ以上のカラムを削除")
         }
     }
 
