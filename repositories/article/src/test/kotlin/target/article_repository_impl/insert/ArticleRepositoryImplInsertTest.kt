@@ -6,15 +6,14 @@ import dsl.ArticleDslImpl
 import enum.IsSuccess
 import external.ExternalArticle
 import kotlinx.coroutines.runBlocking
-import mock.TestDatabase
-import mock.time
+import mock.*
 import repository.ArticleRepositoryImpl
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ArticleRepositoryImplInsertTest {
 
-    private val articleRepository = ArticleRepositoryImpl(ArticleDslImpl(), TestDatabase)
+    private val articleRepository = ArticleRepositoryImpl(ArticleDslImpl(), TestDatabaseForInsert)
 
     @Test
     fun insertで新たなレコードを挿入する(): Unit = runBlocking {

@@ -6,16 +6,14 @@ import dsl.ArticleDslImpl
 import enum.IsSuccess
 import external.ExternalArticle
 import kotlinx.coroutines.runBlocking
-import mock.TestData
-import mock.TestDatabase
-import mock.time
+import mock.*
 import repository.ArticleRepositoryImpl
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ArticleRepositoryImplUpdateTest {
 
-    private val articleRepository = ArticleRepositoryImpl(ArticleDslImpl(), TestDatabase)
+    private val articleRepository = ArticleRepositoryImpl(ArticleDslImpl(), TestDatabaseForUpdate)
 
     @Test
     fun updateでレコードを更新する(): Unit = runBlocking {

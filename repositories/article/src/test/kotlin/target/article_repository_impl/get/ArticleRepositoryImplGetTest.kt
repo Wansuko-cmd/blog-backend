@@ -5,9 +5,7 @@ package target.article_repository_impl.get
 import dsl.ArticleDslImpl
 import exceptions.RepositoryException
 import kotlinx.coroutines.runBlocking
-import mock.TestDatabase
-import mock.TestData
-import mock.seeding
+import mock.*
 import repository.ArticleRepositoryImpl
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -15,7 +13,7 @@ import kotlin.test.assertFailsWith
 
 class ArticleRepositoryImplGetTest {
 
-    private val articleRepository = ArticleRepositoryImpl(ArticleDslImpl(), TestDatabase)
+    private val articleRepository = ArticleRepositoryImpl(ArticleDslImpl(), TestDatabaseForGet)
 
     @Test
     fun getAllで全てのArticleを取得する() = runBlocking {

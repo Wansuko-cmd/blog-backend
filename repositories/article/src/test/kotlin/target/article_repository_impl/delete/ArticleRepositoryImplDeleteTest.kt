@@ -6,8 +6,7 @@ import dsl.ArticleDslImpl
 import enum.IsSuccess
 import exceptions.RepositoryException
 import kotlinx.coroutines.runBlocking
-import mock.TestData
-import mock.TestDatabase
+import mock.*
 import repository.ArticleRepositoryImpl
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -15,7 +14,7 @@ import kotlin.test.assertFailsWith
 
 class ArticleRepositoryImplDeleteTest {
 
-    private val articleRepository = ArticleRepositoryImpl(ArticleDslImpl(), TestDatabase)
+    private val articleRepository = ArticleRepositoryImpl(ArticleDslImpl(), TestDatabaseForDelete)
 
     @Test
     fun deleteで指定されたレコードを削除する(): Unit = runBlocking {
