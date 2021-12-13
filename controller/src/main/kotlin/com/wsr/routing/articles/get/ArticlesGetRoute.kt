@@ -4,14 +4,13 @@ import com.wsr.utils.exceptions.ControllerException
 import com.wsr.utils.routing.getRouteHandler
 import core.ArticleService
 import io.ktor.application.*
-import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import kotlinx.coroutines.async
 
 fun Route.articleGetRoute(articleService: ArticleService) {
-    getRouteHandler {
 
+    getRouteHandler {
         val page = call.request.queryParameters["page"]
         val offset = call.request.queryParameters["offset"]
 

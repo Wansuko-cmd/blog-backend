@@ -19,8 +19,8 @@ class ArticleRepositoryImplGetTest {
 
     @Test
     fun getAllで全てのArticleを取得する() = runBlocking {
-        val articles = articleRepository.getAll().sortedBy { it.createdAt }
-        assertEquals(TestData, articles)
+        val articles = articleRepository.getAll()
+        assertEquals(TestData.sortedBy { it.id }, articles.sortedBy { it.id })
     }
 
     @Test
