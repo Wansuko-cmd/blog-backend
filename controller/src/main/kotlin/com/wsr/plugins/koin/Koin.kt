@@ -18,7 +18,7 @@ fun Application.configureKoin() {
 
     val module = module {
         factory<ArticleService> { ArticleServiceImpl(get()) }
-        factory<ArticleRepository> { ArticleRepositoryImpl(get(), h2) }
+        factory<ArticleRepository> { ArticleRepositoryImpl(get(), h2, DevH2) }
         factory<ArticleDsl> { ArticleDslImpl() }
     }
 

@@ -12,7 +12,6 @@ class ArticleDslImpl : ArticleDsl {
 
     override fun getAll(database: Database): List<ExternalArticle> = transaction(database) {
         Articles.selectAll()
-            .orderBy(Articles.createdAt)
             .map { it.toExternalArticle() }
     }
 

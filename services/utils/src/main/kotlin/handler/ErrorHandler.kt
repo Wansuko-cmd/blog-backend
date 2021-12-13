@@ -12,7 +12,7 @@ inline fun <TClass: Any, Result> TClass.readErrorHandler(block: () -> Result): R
     errorLog(e, "リポジトリにてエラー発生", mapOf("class" to this.javaClass.simpleName))
 
     throw when(e) {
-        is RepositoryException.NotFoundException -> ServiceException.NotFoundException()
+        is RepositoryException.NotFoundException -> ServiceException.RecordNotFoundException()
         is RepositoryException.DatabaseErrorException -> ServiceException.ServerErrorException()
     }
 
@@ -36,7 +36,7 @@ inline fun <TClass: Any> TClass.writeErrorHandler(block: () -> IsSuccess): IsSuc
     errorLog(e, "リポジトリにてエラー発生", mapOf("class" to this.javaClass.simpleName))
 
     throw when(e) {
-        is RepositoryException.NotFoundException -> ServiceException.NotFoundException()
+        is RepositoryException.NotFoundException -> ServiceException.RecordNotFoundException()
         is RepositoryException.DatabaseErrorException -> ServiceException.ServerErrorException()
     }
 

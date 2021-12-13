@@ -9,14 +9,13 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 import tables.Articles
 
-val TestDatabase by lazy {
-    DatabaseWrapper(
-        connectDatabase().apply {
-            createTable()
-            seeding(TestData)
-        }
-    )
-}
+val TestDatabase = DatabaseWrapper(
+    connectDatabase().apply {
+        createTable()
+        seeding(TestData)
+    }
+)
+
 
 private fun connectDatabase(): Database {
     return Database.connect(
