@@ -16,10 +16,12 @@ val TestDatabase = DatabaseWrapper(
     }
 )
 
+var number = 1;
+
 
 private fun connectDatabase(): Database {
     return Database.connect(
-        "jdbc:h2:mem:test_db;DB_CLOSE_DELAY=-1",
+        "jdbc:h2:mem:test_db${number++};DB_CLOSE_DELAY=-1",
         driver = "org.h2.Driver",
         user = "",
         password = ""
