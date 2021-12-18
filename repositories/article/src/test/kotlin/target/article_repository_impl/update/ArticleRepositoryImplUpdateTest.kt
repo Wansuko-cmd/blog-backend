@@ -2,9 +2,8 @@
 
 package target.article_repository_impl.update
 
+import article.ExternalArticle
 import dsl.ArticleDslImpl
-import enum.IsSuccess
-import external.ExternalArticle
 import kotlinx.coroutines.runBlocking
 import mock.*
 import repository.ArticleRepositoryImpl
@@ -23,7 +22,7 @@ class ArticleRepositoryImplUpdateTest {
 
         val result = articleRepository.update(newRecord)
 
-        assertEquals(IsSuccess.Success, result)
+        assertEquals(Unit, result)
         assertEquals(newRecord, articleRepository.getById(oldRecord.id))
     }
 }

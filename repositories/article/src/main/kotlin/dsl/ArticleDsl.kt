@@ -1,6 +1,6 @@
 package dsl
 
-import external.ExternalArticle
+import article.ExternalArticle
 import org.jetbrains.exposed.sql.Database
 
 interface ArticleDsl {

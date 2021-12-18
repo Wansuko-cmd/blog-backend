@@ -1,6 +1,5 @@
 package handler
 
-import enum.IsSuccess
 import exceptions.DomainException
 import exceptions.RepositoryException
 import exceptions.ServiceException
@@ -23,24 +22,26 @@ inline fun <TClass: Any, Result> TClass.readErrorHandler(block: () -> Result): R
 
 
 
-inline fun <TClass: Any> TClass.writeErrorHandler(block: () -> IsSuccess): IsSuccess = try {
-    block()
-} catch (e: DomainException) {
-    errorLog(e, "ドメインにてエラー発生", mapOf("class" to this.javaClass.simpleName))
+inline fun <TClass: Any> TClass.writeErrorHandler(block: () -> Unit) {
+    try {
+        block()
+    } catch (e: DomainException) {
+        errorLog(e, "ドメインにてエラー発生", mapOf("class" to this.javaClass.simpleName))
 
-    throw when(e) {
-        is DomainException.ValidationException -> ServiceException.IllegalArgumentException()
+        throw when(e) {
+            is DomainException.ValidationException -> ServiceException.IllegalArgumentException()
+        }
+
+    } catch (e: RepositoryException) {
+        errorLog(e, "リポジトリにてエラー発生", mapOf("class" to this.javaClass.simpleName))
+
+        throw when(e) {
+            is RepositoryException.NotFoundException -> ServiceException.RecordNotFoundException()
+            is RepositoryException.DatabaseErrorException -> ServiceException.ServerErrorException()
+        }
+
+    } catch (e: Exception) {
+        errorLog(e, "エラー発生", mapOf("class" to this.javaClass.simpleName))
+        throw ServiceException.ServerErrorException()
     }
-
-} catch (e: RepositoryException) {
-    errorLog(e, "リポジトリにてエラー発生", mapOf("class" to this.javaClass.simpleName))
-
-    throw when(e) {
-        is RepositoryException.NotFoundException -> ServiceException.RecordNotFoundException()
-        is RepositoryException.DatabaseErrorException -> ServiceException.ServerErrorException()
-    }
-
-} catch (e: Exception) {
-    errorLog(e, "エラー発生", mapOf("class" to this.javaClass.simpleName))
-    throw ServiceException.ServerErrorException()
 }

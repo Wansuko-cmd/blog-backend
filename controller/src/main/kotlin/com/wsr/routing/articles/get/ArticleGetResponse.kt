@@ -1,6 +1,6 @@
 package com.wsr.routing.articles.get
 
-import external.ExternalArticle
+import article.ExternalArticle
 import kotlinx.datetime.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

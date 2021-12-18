@@ -1,7 +1,7 @@
 package dsl
 
+import article.ExternalArticle
 import exceptions.RepositoryException
-import external.ExternalArticle
 import kotlinx.datetime.toJavaLocalDateTime
 import kotlinx.datetime.toKotlinLocalDateTime
 import org.jetbrains.exposed.sql.*

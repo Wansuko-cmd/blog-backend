@@ -3,7 +3,6 @@
 package target.handler
 
 import exceptions.RepositoryException
-import exceptions.ServiceException
 import handler.readDatabaseHandler
 import mock.TestDatabase1
 import mock.TestDatabase2

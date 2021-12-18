@@ -2,9 +2,8 @@
 
 package target.article_repository_impl.insert
 
+import article.ExternalArticle
 import dsl.ArticleDslImpl
-import enum.IsSuccess
-import external.ExternalArticle
 import kotlinx.coroutines.runBlocking
 import mock.*
 import repository.ArticleRepositoryImpl
@@ -22,7 +21,7 @@ class ArticleRepositoryImplInsertTest {
 
         val result = articleRepository.insert(record)
 
-        assertEquals(IsSuccess.Success, result)
+        assertEquals(Unit, result)
         assertEquals(record, articleRepository.getById(record.id))
     }
 }

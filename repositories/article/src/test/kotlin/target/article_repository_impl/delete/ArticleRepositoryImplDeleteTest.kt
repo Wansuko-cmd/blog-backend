@@ -3,7 +3,6 @@
 package target.article_repository_impl.delete
 
 import dsl.ArticleDslImpl
-import enum.IsSuccess
 import exceptions.RepositoryException
 import kotlinx.coroutines.runBlocking
 import mock.*
@@ -22,7 +21,7 @@ class ArticleRepositoryImplDeleteTest {
 
         val result = articleRepository.delete(targetRecord.id)
 
-        assertEquals(IsSuccess.Success, result)
+        assertEquals(Unit, result)
         assertFailsWith<RepositoryException.NotFoundException> { articleRepository.getById(targetRecord.id) }
     }
 }

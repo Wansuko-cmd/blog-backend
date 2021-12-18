@@ -1,6 +1,6 @@
 package mock
 
-import external.ExternalArticle
+import article.ExternalArticle
 import kotlinx.datetime.LocalDateTime
 
 val time = LocalDateTime.parse("2005-05-05T15:00:00")

@@ -1,14 +1,14 @@
 package com.wsr.routing.articles.get
 
+import article.SearchArticleService
 import com.wsr.utils.exceptions.ControllerException
 import com.wsr.utils.routing.getRouteHandler
-import core.ArticleService
 import io.ktor.application.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import kotlinx.coroutines.async
 
-fun Route.articleGetRoute(articleService: ArticleService) {
+fun Route.articleGetRoute(searchArticleService: SearchArticleService) {
 
     getRouteHandler {
         val page = call.request.queryParameters["page"]
@@ -17,11 +17,11 @@ fun Route.articleGetRoute(articleService: ArticleService) {
         val articles = async {
 
             val externalArticle = if(page != null && offset != null) {
-                articleService.getWithPaginate(
+                searchArticleService.getWithPaginate(
                     page.toIntOrNull() ?: throw ControllerException.IllegalParameterException(),
                     offset.toIntOrNull() ?: throw ControllerException.IllegalParameterException()
                 )
-            } else { articleService.getAll() }
+            } else { searchArticleService.getAll() }
             externalArticle.map { ArticleGetResponse.fromExternalArticle(it) }
         }
         proceed()
@@ -32,7 +32,7 @@ fun Route.articleGetRoute(articleService: ArticleService) {
         val id = call.parameters["id"] ?: throw ControllerException.ParameterNotFoundException()
         val article = async {
             ArticleGetResponse
-                .fromExternalArticle(articleService.getById(id))
+                .fromExternalArticle(searchArticleService.getById(id))
         }
         proceed()
         call.respond(article.await())

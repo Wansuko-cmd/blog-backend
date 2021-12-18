@@ -16,7 +16,8 @@ subprojects {
 
         implementation(project(":databases:common"))
 
-        implementation(project(":services:utils"))
+        implementation(project(":services:repositories"))
+        projectImplementation(":services:external")
 
         projectImplementation(":repositories:utils")
 

@@ -1,4 +1,4 @@
-package external
+package article
 
 import entities.article.Article
 import kotlinx.datetime.LocalDateTime
@@ -12,7 +12,8 @@ data class ExternalArticle(
     val modifiedAt: LocalDateTime,
 )
 
-internal fun Article.toExternalArticle(): ExternalArticle = ExternalArticle(
+
+fun Article.toExternalArticle(): ExternalArticle = ExternalArticle(
     id = id.value,
     title = title.value,
     body = body.value,

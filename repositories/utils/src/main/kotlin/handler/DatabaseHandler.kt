@@ -1,9 +1,7 @@
 package handler
 
 import databases.DatabaseWrapper
-import enum.IsSuccess
 import exceptions.RepositoryException
-import exceptions.ServiceException
 import logger.errorLog
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.name
@@ -40,11 +38,9 @@ fun <TClass: Any, Result> TClass.readDatabaseHandler(
 fun <TClass: Any> TClass.writeDatabasesHandler(
     vararg databases: DatabaseWrapper,
     block: (Database) -> Unit
-): IsSuccess {
+) {
     try {
         transaction { databases.forEach { block(it.instance) } }
-
-        return IsSuccess.Success
     } catch (e: NoSuchElementException) {
         throw RepositoryException.NotFoundException()
     } catch (e: Exception) {
