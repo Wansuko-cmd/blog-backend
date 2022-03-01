@@ -1,0 +1,9 @@
+package article.update
+
+import article.ArticleUseCaseModel
+import exceptions.UpdateDataFailedException
+import state.State
+
+interface UpdateArticleUseCase {
+    suspend fun update(id: String, title: String, body: String): State<ArticleUseCaseModel, UpdateDataFailedException>
+}

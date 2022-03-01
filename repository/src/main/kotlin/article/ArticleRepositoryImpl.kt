@@ -4,7 +4,7 @@ import DatabaseWrapper
 import entities.article.*
 import exceptions.DeleteDataFailedException
 import exceptions.GetDataFailedException
-import exceptions.InsertDataFailedException
+import exceptions.CreateDataFailedException
 import exceptions.UpdateDataFailedException
 import kotlinx.datetime.toJavaLocalDateTime
 import kotlinx.datetime.toKotlinLocalDateTime
@@ -39,7 +39,7 @@ class ArticleRepositoryImpl(databaseWrapper: DatabaseWrapper) : ArticleRepositor
         State.Failure(GetDataFailedException.DatabaseException())
     }
 
-    override suspend fun insert(article: Article): State<UniqueId, InsertDataFailedException> = try {
+    override suspend fun insert(article: Article): State<UniqueId, CreateDataFailedException> = try {
         transaction(database) {
             ArticleModel.insert {
                 it[id] = article.id.value
@@ -52,7 +52,7 @@ class ArticleRepositoryImpl(databaseWrapper: DatabaseWrapper) : ArticleRepositor
         }
         State.Success(article.id)
     } catch (e: Exception) {
-        State.Failure(InsertDataFailedException.DatabaseException())
+        State.Failure(CreateDataFailedException.DatabaseException())
     }
 
 

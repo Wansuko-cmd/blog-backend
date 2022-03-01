@@ -6,9 +6,15 @@ sealed class State<out T, out E> {
     object Empty : State<Nothing, Nothing>()
 }
 
-inline fun <T, E, NT> State<T, E>.map(block: (T) -> NT): State<NT, E> = when (this) {
+inline fun <T, E, NT> State<T, E>.onSuccess(block: (T) -> NT): State<NT, E> = when (this) {
     is State.Success -> State.Success(block(value))
     is State.Failure -> this
+    is State.Empty -> this
+}
+
+inline fun <T, E, NT, NE> State<T, E>.mapBoth(success: (T) -> NT, failure: (E) -> NE): State<NT, NE> = when (this) {
+    is State.Success -> State.Success(success(value))
+    is State.Failure -> State.Failure(failure(value))
     is State.Empty -> this
 }
 
@@ -19,9 +25,9 @@ inline fun <T, E, NT> State<T, E>.flatMap(block: (T) -> State<NT, E>): State<NT,
 }
 
 inline fun <T, E> State<T, E>.consume(
-    success: (T) -> Unit,
-    failure: (E) -> Unit,
-    empty: () -> Unit,
+    success: (T) -> Unit = {},
+    failure: (E) -> Unit = {},
+    empty: () -> Unit = {},
 ): Unit = when (this) {
     is State.Success -> success(value)
     is State.Failure -> failure(value)

@@ -1,4 +1,4 @@
-package com.wsr.routing.articles.get
+package com.wsr.routing.articles
 
 import article.ArticleUseCaseModel
 import kotlinx.datetime.LocalDateTime
@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ArticleGetResponse(
+data class ArticleSerializable(
     val id: String,
     val title: String,
     val body: String,
@@ -15,7 +15,7 @@ data class ArticleGetResponse(
     @SerialName("modified_at") val modifiedAt: LocalDateTime,
 ) {
     companion object {
-        fun ArticleUseCaseModel.toSerializable() = ArticleGetResponse(
+        fun ArticleUseCaseModel.toSerializable() = ArticleSerializable(
             id, title, body, goodCount, createdAt, modifiedAt
         )
     }
