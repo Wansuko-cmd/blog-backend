@@ -1,40 +1,36 @@
 package com.wsr.routing.articles.get
 
-import article.SearchArticleService
-import com.wsr.utils.exceptions.ControllerException
-import com.wsr.utils.routing.getRouteHandler
+import article.get.GetArticleUseCase
+import com.wsr.routing.articles.get.ArticleGetResponse.Companion.toSerializable
 import io.ktor.application.*
 import io.ktor.response.*
 import io.ktor.routing.*
-import kotlinx.coroutines.async
+import org.koin.ktor.ext.inject
+import state.consume
+import state.map
 
-fun Route.articleGetRoute(searchArticleService: SearchArticleService) {
+fun Route.articleGetRoute() {
 
-    getRouteHandler {
-        val page = call.request.queryParameters["page"]
-        val offset = call.request.queryParameters["offset"]
+    val getArticleUseCase by inject<GetArticleUseCase>()
 
-        val articles = async {
-
-            val externalArticle = if(page != null && offset != null) {
-                searchArticleService.getWithPaginate(
-                    page.toIntOrNull() ?: throw ControllerException.IllegalParameterException(),
-                    offset.toIntOrNull() ?: throw ControllerException.IllegalParameterException()
-                )
-            } else { searchArticleService.getAll() }
-            externalArticle.map { ArticleGetResponse.fromExternalArticle(it) }
-        }
-        proceed()
-        call.respond(articles.await())
+    get {
+        getArticleUseCase.getAll()
+            .map { list -> list.map { it.toSerializable() } }
+            .consume(
+                success = { call.respond(it) },
+                failure = { call.respond(it) },
+                empty = { },
+            )
     }
 
-    getRouteHandler("{id}") {
-        val id = call.parameters["id"] ?: throw ControllerException.ParameterNotFoundException()
-        val article = async {
-            ArticleGetResponse
-                .fromExternalArticle(searchArticleService.getById(id))
-        }
-        proceed()
-        call.respond(article.await())
+    get("{id}") {
+        val id = call.parameters["id"] ?: return@get
+        getArticleUseCase.getById(id)
+            .map { it.toSerializable() }
+            .consume(
+                success = { call.respond(it) },
+                failure = { call.respond(it) },
+                empty = { }
+            )
     }
 }

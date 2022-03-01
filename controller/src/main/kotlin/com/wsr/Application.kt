@@ -1,8 +1,8 @@
 package com.wsr
 
-import io.ktor.application.*
-import com.wsr.plugins.*
+import com.wsr.plugins.installPlugins
 import com.wsr.routing.mainRoute
+import io.ktor.application.*
 
 fun main(args: Array<String>): Unit =
     io.ktor.server.netty.EngineMain.main(args)

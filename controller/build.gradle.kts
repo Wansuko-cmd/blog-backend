@@ -27,14 +27,8 @@ dependencies {
     implementation("io.insert-koin:koin-ktor:$koinVersion")
     implementation("io.insert-koin:koin-logger-slf4j:$koinVersion")
 
-    implementation(project(":services:external"))
-    implementation(project(":services:controllers"))
-    implementation(project(":services:search"))
-    implementation(project(":services:repositories"))
-
-    implementation(project(":repositories:article"))
-
-    implementation(project(":databases:common"))
-    implementation(project(":databases:dev"))
-    implementation(project(":databases:h2"))
+    implementation(project(":usecase"))
+    implementation(project(":repository"))
+    implementation(project(":domain"))
+    implementation(project(":database"))
 }

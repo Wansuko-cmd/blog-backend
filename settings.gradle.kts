@@ -8,30 +8,15 @@
  */
 
 rootProject.name = "blog-backend"
+
+include("domain")
+
+include("repository")
+
+include("database")
+
+include("usecase")
+
 include("controller")
-
-include(
-    "services",
-    "services:utils",
-    "services:repositories",
-    "services:search",
-    "services:controllers",
-    "services:external",
-)
-
-include(
-    "repositories",
-    "repositories:article",
-    "repositories:utils",
-)
-
-include("domains")
-
-include(
-    "databases",
-    "databases:h2",
-    "databases:common",
-    "databases:dev",
-)
 
 include("utils")
