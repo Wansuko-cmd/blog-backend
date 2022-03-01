@@ -19,8 +19,8 @@ dependencies {
     //hikari
     implementation("com.zaxxer:HikariCP:$hikariVersion")
 
-    //H2
-    implementation("com.h2database:h2:2.1.210")
+    //H2(バージョンを変えると上手く動かない)
+    implementation("com.h2database:h2:1.4.200")
 
     implementation(project(":domain"))
 }

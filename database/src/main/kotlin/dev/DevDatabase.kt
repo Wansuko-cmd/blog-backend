@@ -38,7 +38,6 @@ private fun hikari(): HikariDataSource {
         password = ""
         maximumPoolSize = 3
         isAutoCommit = false
-        transactionIsolation = "TRANSACTION_REPEATABLE_READ"
         validate()
     }
     return HikariDataSource(config)

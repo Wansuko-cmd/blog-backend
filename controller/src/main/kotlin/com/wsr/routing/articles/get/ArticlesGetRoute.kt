@@ -3,6 +3,7 @@ package com.wsr.routing.articles.get
 import article.get.GetArticleUseCase
 import com.wsr.routing.articles.get.ArticleGetResponse.Companion.toSerializable
 import io.ktor.application.*
+import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import org.koin.ktor.ext.inject
@@ -18,8 +19,8 @@ fun Route.articleGetRoute() {
             .map { list -> list.map { it.toSerializable() } }
             .consume(
                 success = { call.respond(it) },
-                failure = { call.respond(it) },
-                empty = { },
+                failure = { call.respond(HttpStatusCode.InternalServerError, it) },
+                empty = { call.respond(HttpStatusCode.NotFound) },
             )
     }
 
@@ -29,8 +30,8 @@ fun Route.articleGetRoute() {
             .map { it.toSerializable() }
             .consume(
                 success = { call.respond(it) },
-                failure = { call.respond(it) },
-                empty = { }
+                failure = { call.respond(HttpStatusCode.InternalServerError, it) },
+                empty = { call.respond(HttpStatusCode.NotFound) }
             )
     }
 }
