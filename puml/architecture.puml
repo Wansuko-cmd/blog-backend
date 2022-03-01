@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+package Domain {
+    object Model
+    object RepositoryInterface
+}
+
+package Repository {
+    object DSL
+    object RepositoryModel
+
+    DSL --|> RepositoryInterface
+    DSL -> RepositoryModel
+
+    RepositoryModel --|> Model
+}
+
+package UseCase {
+    UseCase <-> Domain
+    UseCase <-> Repository
+}
+
+package Controller {
+    Controller <-> UseCase
+}
+
+
+package User {
+    User <-> Controller
+}
+
+@enduml

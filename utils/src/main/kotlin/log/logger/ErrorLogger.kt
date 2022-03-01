@@ -1,6 +1,6 @@
 package logger
 
-import builder.logger
+import log.builder.logger
 
 fun errorLog(e: Throwable, msg: String, relation: Map<String, String> = mapOf()) {
 
