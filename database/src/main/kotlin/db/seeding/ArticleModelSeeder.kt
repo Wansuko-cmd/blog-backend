@@ -10,6 +10,7 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.batchInsert
 import org.jetbrains.exposed.sql.transactions.transaction
 import table.ArticleModel
+import utils.ImagePath
 import utils.UniqueId
 
 object ArticleModelSeeder : DatabaseSeeder {
@@ -31,6 +32,7 @@ object ArticleModelSeeder : DatabaseSeeder {
     private val articleTestData = listOf(
         Article(
             UniqueId("UniqueId1"),
+            ImagePath("Thumbnail1"),
             ArticleTitle("Title1"),
             ArticleBody("Body1"),
             GoodCount(1),
@@ -39,6 +41,7 @@ object ArticleModelSeeder : DatabaseSeeder {
         ),
         Article(
             UniqueId("UniqueId2"),
+            null,
             ArticleTitle("Title2"),
             ArticleBody("Body2"),
             GoodCount(2),
@@ -47,6 +50,7 @@ object ArticleModelSeeder : DatabaseSeeder {
         ),
         Article(
             UniqueId("UniqueId3"),
+            ImagePath("Thumbnail3"),
             ArticleTitle("Title3"),
             ArticleBody("Body3"),
             GoodCount(3),
@@ -55,6 +59,7 @@ object ArticleModelSeeder : DatabaseSeeder {
         ),
         Article(
             UniqueId("UniqueId4"),
+            ImagePath("Thumbnail4"),
             ArticleTitle("Title4"),
             ArticleBody("Body4"),
             GoodCount(4),

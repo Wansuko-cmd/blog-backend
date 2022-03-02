@@ -1,8 +1,8 @@
 package entities.article
 
+import exceptions.CreateDataFailedException
 import exceptions.DeleteDataFailedException
 import exceptions.GetDataFailedException
-import exceptions.CreateDataFailedException
 import exceptions.UpdateDataFailedException
 import state.State
 import utils.UniqueId

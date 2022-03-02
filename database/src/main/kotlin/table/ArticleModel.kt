@@ -5,6 +5,7 @@ import org.jetbrains.exposed.sql.javatime.datetime
 
 object ArticleModel : Table("articles") {
     val id = varchar("id", 36)
+    val thumbnailPath = text("thumbnail_path").nullable()
     val title = text("title")
     val body = text("body")
     val goodCount = integer("good_count")

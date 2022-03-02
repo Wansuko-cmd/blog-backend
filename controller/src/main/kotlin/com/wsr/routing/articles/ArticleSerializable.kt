@@ -8,6 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ArticleSerializable(
     val id: String,
+    val thumbnailPath: String?,
     val title: String,
     val body: String,
     @SerialName("good_count") val goodCount: Int,
@@ -16,7 +17,13 @@ data class ArticleSerializable(
 ) {
     companion object {
         fun ArticleUseCaseModel.toSerializable() = ArticleSerializable(
-            id, title, body, goodCount, createdAt, modifiedAt
+            id = id,
+            thumbnailPath = thumbnailPath,
+            title = title,
+            body = body,
+            goodCount = goodCount,
+            createdAt = createdAt,
+            modifiedAt = modifiedAt,
         )
     }
 }

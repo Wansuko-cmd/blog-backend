@@ -6,7 +6,9 @@ import entities.article.ArticleBody
 import entities.article.ArticleRepository
 import entities.article.ArticleTitle
 import exceptions.UpdateDataFailedException
-import state.*
+import state.State
+import state.map
+import utils.ImagePath
 import utils.UniqueId
 
 class UpdateArticleUseCaseImpl(
@@ -15,19 +17,28 @@ class UpdateArticleUseCaseImpl(
 
     override suspend fun update(
         id: String,
+        thumbnail: String?,
         title: String,
         body: String
     ): State<ArticleUseCaseModel, UpdateDataFailedException> {
 
         val newArticle = articleRepository.getById(UniqueId(id))
-            .map { it.modify(title = ArticleTitle(title), body = ArticleBody(body)) }
+            .map {
+                it.modify(
+                    thumbnailPath = thumbnail?.let { ImagePath(thumbnail) },
+                    title = ArticleTitle(title),
+                    body = ArticleBody(body)
+                )
+            }
 
-        return when(newArticle) {
+        return when (newArticle) {
             is State.Success -> {
                 articleRepository.update(newArticle.value)
                     .map { newArticle.value.toUseCaseModel() }
             }
-            is State.Failure -> { State.Failure(UpdateDataFailedException.DatabaseException()) }
+            is State.Failure -> {
+                State.Failure(UpdateDataFailedException.DatabaseException())
+            }
             is State.Empty -> newArticle
         }
     }

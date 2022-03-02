@@ -9,12 +9,18 @@ import entities.article.ArticleTitle
 import exceptions.CreateDataFailedException
 import state.State
 import state.map
+import utils.ImagePath
 
 class CreateArticleUseCaseImpl(
     private val articleRepository: ArticleRepository,
 ) : CreateArticleUseCase {
-    override suspend fun create(title: String, body: String): State<ArticleUseCaseModel, CreateDataFailedException> {
+    override suspend fun create(
+        thumbnail: String?,
+        title: String,
+        body: String
+    ): State<ArticleUseCaseModel, CreateDataFailedException> {
         val article = Article(
+            thumbnailPath = thumbnail?.let { ImagePath(it) },
             title = ArticleTitle(title),
             body = ArticleBody(body),
         )

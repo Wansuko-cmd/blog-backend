@@ -16,8 +16,8 @@ fun Route.articleUpdateRoute() {
     val updateArticleUseCase by inject<UpdateArticleUseCase>()
 
     put {
-        val (id, title, body) = call.receive<ArticleUpdateRequest>()
-        updateArticleUseCase.update(id, title, body)
+        val (id, thumbnail, title, body) = call.receive<ArticleUpdateRequest>()
+        updateArticleUseCase.update(id, thumbnail, title, body)
             .map { it.toSerializable() }
             .consume(
                 success = { call.respond(HttpStatusCode.OK, it) },

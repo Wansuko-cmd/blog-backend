@@ -3,7 +3,7 @@
 
 entity "Article"  {
     id [PK]: UniqueId
-    thumbnail: ImagePath
+    thumbnailPath: ImagePath
     title: ArticleTitle
     body: ArticleBody
     goodCount: GoodCount

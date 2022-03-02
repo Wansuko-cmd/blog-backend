@@ -16,8 +16,8 @@ fun Route.articleCreateRoute() {
     val createArticleUseCase by inject<CreateArticleUseCase>()
 
     post {
-        val (title, body) = call.receive<ArticleCreateRequest>()
-        createArticleUseCase.create(title, body)
+        val (thumbnail, title, body) = call.receive<ArticleCreateRequest>()
+        createArticleUseCase.create(thumbnail, title, body)
             .map { it.toSerializable() }
             .consume(
                 success = { call.respond(HttpStatusCode.OK, it) },

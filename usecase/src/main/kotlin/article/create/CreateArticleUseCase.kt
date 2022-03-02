@@ -5,5 +5,9 @@ import exceptions.CreateDataFailedException
 import state.State
 
 interface CreateArticleUseCase {
-    suspend fun create(title: String, body: String): State<ArticleUseCaseModel, CreateDataFailedException>
+    suspend fun create(
+        thumbnail: String?,
+        title: String,
+        body: String
+    ): State<ArticleUseCaseModel, CreateDataFailedException>
 }

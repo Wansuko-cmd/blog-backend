@@ -5,6 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ArticleUpdateRequest(
     val id: String,
+    val thumbnailPath: String?,
     val title: String,
     val body: String,
     val goodCount: Int,

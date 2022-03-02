@@ -4,7 +4,6 @@ import entities.article.ArticleRepository
 import exceptions.DeleteDataFailedException
 import state.State
 import state.flatMap
-import state.map
 import utils.UniqueId
 
 class DeleteArticleUseCaseImpl(
