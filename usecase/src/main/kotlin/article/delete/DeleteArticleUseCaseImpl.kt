@@ -3,12 +3,13 @@ package article.delete
 import entities.article.ArticleRepository
 import exceptions.DeleteDataFailedException
 import state.State
-import state.onSuccess
+import state.flatMap
+import state.map
 import utils.UniqueId
 
 class DeleteArticleUseCaseImpl(
     private val articleRepository: ArticleRepository,
 ) : DeleteArticleUseCase {
     override suspend fun delete(id: String): State<Unit, DeleteDataFailedException> =
-        articleRepository.delete(UniqueId(id)).onSuccess { }
+        articleRepository.delete(UniqueId(id)).flatMap { State.Success(Unit) }
 }

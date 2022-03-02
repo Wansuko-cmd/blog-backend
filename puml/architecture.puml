@@ -1,5 +1,4 @@
 @startuml
-'https://plantuml.com/sequence-diagram
 
 package Domain {
     object Model
@@ -11,9 +10,14 @@ package Repository {
     object RepositoryModel
 
     DSL --|> RepositoryInterface
-    DSL -> RepositoryModel
 
-    RepositoryModel --|> Model
+    Repository <-> Database
+}
+
+package Database {
+    object Migration
+    object DatabaseModel
+
 }
 
 package UseCase {

@@ -8,7 +8,7 @@ import entities.article.ArticleRepository
 import entities.article.ArticleTitle
 import exceptions.CreateDataFailedException
 import state.State
-import state.onSuccess
+import state.map
 
 class CreateArticleUseCaseImpl(
     private val articleRepository: ArticleRepository,
@@ -19,6 +19,6 @@ class CreateArticleUseCaseImpl(
             body = ArticleBody(body),
         )
         return articleRepository.insert(article)
-            .onSuccess { article.toUseCaseModel() }
+            .map { article.toUseCaseModel() }
     }
 }

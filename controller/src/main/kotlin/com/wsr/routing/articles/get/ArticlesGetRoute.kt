@@ -8,7 +8,7 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import org.koin.ktor.ext.inject
 import state.consume
-import state.onSuccess
+import state.map
 
 fun Route.articleGetRoute() {
 
@@ -16,7 +16,7 @@ fun Route.articleGetRoute() {
 
     get {
         getArticleUseCase.getAll()
-            .onSuccess { list -> list.map { it.toSerializable() } }
+            .map { list -> list.map { it.toSerializable() } }
             .consume(
                 success = { call.respond(HttpStatusCode.OK, it) },
                 failure = { call.respond(HttpStatusCode.InternalServerError, it) },
@@ -27,7 +27,7 @@ fun Route.articleGetRoute() {
     get("{id}") {
         val id = call.parameters["id"] ?: return@get
         getArticleUseCase.getById(id)
-            .onSuccess { it.toSerializable() }
+            .map { it.toSerializable() }
             .consume(
                 success = { call.respond(HttpStatusCode.OK, it) },
                 failure = { call.respond(HttpStatusCode.InternalServerError, it) },

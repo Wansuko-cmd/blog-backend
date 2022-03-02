@@ -6,7 +6,7 @@ sealed class State<out T, out E> {
     object Empty : State<Nothing, Nothing>()
 }
 
-inline fun <T, E, NT> State<T, E>.onSuccess(block: (T) -> NT): State<NT, E> = when (this) {
+inline fun <T, E, NT> State<T, E>.map(block: (T) -> NT): State<NT, E> = when (this) {
     is State.Success -> State.Success(block(value))
     is State.Failure -> this
     is State.Empty -> this

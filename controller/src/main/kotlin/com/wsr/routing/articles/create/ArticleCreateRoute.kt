@@ -9,7 +9,7 @@ import io.ktor.response.*
 import io.ktor.routing.*
 import org.koin.ktor.ext.inject
 import state.consume
-import state.onSuccess
+import state.map
 
 fun Route.articleCreateRoute() {
 
@@ -18,7 +18,7 @@ fun Route.articleCreateRoute() {
     post {
         val (title, body) = call.receive<ArticleCreateRequest>()
         createArticleUseCase.create(title, body)
-            .onSuccess { it.toSerializable() }
+            .map { it.toSerializable() }
             .consume(
                 success = { call.respond(HttpStatusCode.OK, it) },
                 failure = { call.respond(HttpStatusCode.InternalServerError, it) },

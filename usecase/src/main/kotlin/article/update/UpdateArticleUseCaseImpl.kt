@@ -20,12 +20,12 @@ class UpdateArticleUseCaseImpl(
     ): State<ArticleUseCaseModel, UpdateDataFailedException> {
 
         val newArticle = articleRepository.getById(UniqueId(id))
-            .onSuccess { it.modify(title = ArticleTitle(title), body = ArticleBody(body)) }
+            .map { it.modify(title = ArticleTitle(title), body = ArticleBody(body)) }
 
         return when(newArticle) {
             is State.Success -> {
                 articleRepository.update(newArticle.value)
-                    .onSuccess { newArticle.value.toUseCaseModel() }
+                    .map { newArticle.value.toUseCaseModel() }
             }
             is State.Failure -> { State.Failure(UpdateDataFailedException.DatabaseException()) }
             is State.Empty -> newArticle
