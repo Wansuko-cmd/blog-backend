@@ -8,6 +8,7 @@ import entities.article.ArticleTitle
 import exceptions.UpdateDataFailedException
 import state.State
 import state.map
+import state.onSuccess
 import utils.ImagePath
 import utils.UniqueId
 
@@ -34,7 +35,7 @@ class UpdateArticleUseCaseImpl(
         return when (newArticle) {
             is State.Success -> {
                 articleRepository.update(newArticle.value)
-                    .map { newArticle.value.toUseCaseModel() }
+                    .onSuccess { newArticle.value.toUseCaseModel() }
             }
             is State.Failure -> {
                 State.Failure(UpdateDataFailedException.DatabaseException())

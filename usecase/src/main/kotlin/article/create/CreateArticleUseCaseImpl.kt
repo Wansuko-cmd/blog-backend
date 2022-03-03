@@ -9,6 +9,7 @@ import entities.article.ArticleTitle
 import exceptions.CreateDataFailedException
 import state.State
 import state.map
+import state.onSuccess
 import utils.ImagePath
 
 class CreateArticleUseCaseImpl(
@@ -25,6 +26,6 @@ class CreateArticleUseCaseImpl(
             body = ArticleBody(body),
         )
         return articleRepository.insert(article)
-            .map { article.toUseCaseModel() }
+            .onSuccess { article.toUseCaseModel() }
     }
 }

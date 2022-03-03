@@ -4,6 +4,8 @@ import DatabaseWrapper
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import db.seeding.ArticleModelSeeder
+import db.seeding.CommentModelSeeder
+import db.seeding.ReplyModelSeeder
 import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 import javax.sql.DataSource
@@ -19,7 +21,7 @@ val DevDatabase: DatabaseWrapper by lazy {
 }
 
 
-val seeding = listOf(ArticleModelSeeder)
+val seeding = listOf(ArticleModelSeeder, CommentModelSeeder, ReplyModelSeeder)
 
 private fun migrate(dataSource: DataSource) {
     val flyway = Flyway.configure()

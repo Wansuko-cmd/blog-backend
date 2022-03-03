@@ -87,11 +87,11 @@ class ArticleRepositoryImpl(databaseWrapper: DatabaseWrapper) : ArticleRepositor
 }
 
 private fun ResultRow.toArticle() = Article(
-    UniqueId(this[ArticleModel.id]),
-    this[ArticleModel.thumbnailPath]?.let { ImagePath(it) },
-    ArticleTitle(this[ArticleModel.title]),
-    ArticleBody(this[ArticleModel.body]),
-    GoodCount(this[ArticleModel.goodCount]),
-    this[ArticleModel.createdAt].toKotlinLocalDateTime(),
-    this[ArticleModel.modifiedAt].toKotlinLocalDateTime()
+    id = UniqueId(this[ArticleModel.id]),
+    thumbnailPath = this[ArticleModel.thumbnailPath]?.let { ImagePath(it) },
+    title = ArticleTitle(this[ArticleModel.title]),
+    body = ArticleBody(this[ArticleModel.body]),
+    goodCount = GoodCount(this[ArticleModel.goodCount]),
+    createdAt = this[ArticleModel.createdAt].toKotlinLocalDateTime(),
+    modifiedAt = this[ArticleModel.modifiedAt].toKotlinLocalDateTime(),
 )

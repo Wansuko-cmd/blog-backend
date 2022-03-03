@@ -1,10 +1,9 @@
-package com.wsr.routing.articles.update
+package com.wsr.routing.articles.create
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ArticleUpdateRequest(
-    val id: String,
+data class ArticlesCreateRequest(
     val thumbnailPath: String?,
     val title: String,
     val body: String,

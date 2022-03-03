@@ -12,9 +12,15 @@ entity "Article"  {
 entity "Comment" {
     id [PK]: UniqueId
     articleId: UniqueId
-    name: CommentName
     body: CommentBody
 }
 Comment }-- Article
+
+entity "CommentReply" {
+    id [PK]: UniqueId
+    commentId: UniqueId
+    body: CommentBody
+}
+CommentReply }-- Comment
 
 @enduml

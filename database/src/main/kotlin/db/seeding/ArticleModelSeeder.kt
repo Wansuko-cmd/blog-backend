@@ -16,8 +16,9 @@ import utils.UniqueId
 object ArticleModelSeeder : DatabaseSeeder {
     override fun seeding(database: Database) {
         transaction(database) {
-            ArticleModel.batchInsert(articleTestData) {
+            ArticleModel.batchInsert(articleData) {
                 this[ArticleModel.id] = it.id.value
+                this[ArticleModel.thumbnailPath] = it.thumbnailPath?.value
                 this[ArticleModel.title] = it.title.value
                 this[ArticleModel.body] = it.body.value
                 this[ArticleModel.goodCount] = it.goodCount.value
@@ -29,42 +30,42 @@ object ArticleModelSeeder : DatabaseSeeder {
 
     private val time = LocalDateTime.parse("2005-05-05T15:00:00")
 
-    private val articleTestData = listOf(
+    private val articleData = listOf(
         Article(
-            UniqueId("UniqueId1"),
-            ImagePath("Thumbnail1"),
-            ArticleTitle("Title1"),
-            ArticleBody("Body1"),
-            GoodCount(1),
-            time,
-            time,
+            id = UniqueId("articleId1"),
+            thumbnailPath = ImagePath("Thumbnail1"),
+            title = ArticleTitle("Title1"),
+            body = ArticleBody("Body1"),
+            goodCount = GoodCount(1),
+            createdAt = time,
+            modifiedAt = time,
         ),
         Article(
-            UniqueId("UniqueId2"),
-            null,
-            ArticleTitle("Title2"),
-            ArticleBody("Body2"),
-            GoodCount(2),
-            time,
-            time,
+            id = UniqueId("articleId2"),
+            thumbnailPath = null,
+            title = ArticleTitle("Title2"),
+            body = ArticleBody("Body2"),
+            goodCount = GoodCount(2),
+            createdAt = time,
+            modifiedAt = time,
         ),
         Article(
-            UniqueId("UniqueId3"),
-            ImagePath("Thumbnail3"),
-            ArticleTitle("Title3"),
-            ArticleBody("Body3"),
-            GoodCount(3),
-            time,
-            time,
+            id = UniqueId("articleId3"),
+            thumbnailPath = ImagePath("Thumbnail3"),
+            title = ArticleTitle("Title3"),
+            body = ArticleBody("Body3"),
+            goodCount = GoodCount(3),
+            createdAt = time,
+            modifiedAt = time,
         ),
         Article(
-            UniqueId("UniqueId4"),
-            ImagePath("Thumbnail4"),
-            ArticleTitle("Title4"),
-            ArticleBody("Body4"),
-            GoodCount(4),
-            time,
-            time,
+            id = UniqueId("articleId4"),
+            thumbnailPath = ImagePath("Thumbnail4"),
+            title = ArticleTitle("Title4"),
+            body = ArticleBody("Body4"),
+            goodCount = GoodCount(4),
+            createdAt = time,
+            modifiedAt = time,
         )
     )
 }

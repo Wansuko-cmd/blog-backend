@@ -8,12 +8,12 @@ import io.ktor.routing.*
 import org.koin.ktor.ext.inject
 import state.consume
 
-fun Route.articleDeleteRoute() {
+fun Route.articlesDeleteRoute() {
 
     val deleteArticleUseCase by inject<DeleteArticleUseCase>()
 
     delete("{id}") {
-        val id = call.parameters["id"] ?: return@delete
+        val id = call.parameters["id"] ?: return@delete run { call.respond(HttpStatusCode.BadRequest) }
         deleteArticleUseCase.delete(id)
             .consume(
                 success = { call.respond(HttpStatusCode.OK) },

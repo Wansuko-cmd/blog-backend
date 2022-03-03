@@ -11,12 +11,12 @@ import org.koin.ktor.ext.inject
 import state.consume
 import state.map
 
-fun Route.articleUpdateRoute() {
+fun Route.articlesUpdateRoute() {
 
     val updateArticleUseCase by inject<UpdateArticleUseCase>()
 
     put {
-        val (id, thumbnail, title, body) = call.receive<ArticleUpdateRequest>()
+        val (id, thumbnail, title, body) = call.receive<ArticlesUpdateRequest>()
         updateArticleUseCase.update(id, thumbnail, title, body)
             .map { it.toSerializable() }
             .consume(

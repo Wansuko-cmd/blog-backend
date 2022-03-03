@@ -16,7 +16,7 @@ fun Route.articleGetRoute() {
 
     get {
         getArticleUseCase.getAll()
-            .map { list -> list.map { it.toSerializable() } }
+            .map { articles -> articles.map { it.toSerializable() } }
             .consume(
                 success = { call.respond(HttpStatusCode.OK, it) },
                 failure = { call.respond(HttpStatusCode.InternalServerError, it) },
@@ -25,7 +25,7 @@ fun Route.articleGetRoute() {
     }
 
     get("{id}") {
-        val id = call.parameters["id"] ?: return@get
+        val id = call.parameters["id"] ?: return@get run { call.respond(HttpStatusCode.BadRequest) }
         getArticleUseCase.getById(id)
             .map { it.toSerializable() }
             .consume(
