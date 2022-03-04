@@ -18,10 +18,6 @@ subprojects {
         //test
         testImplementation(kotlin("test"))
     }
-
-    tasks.test {
-        useJUnitPlatform()
-    }
 }
 
 fun Project.projectImplementation(dependency: String) {

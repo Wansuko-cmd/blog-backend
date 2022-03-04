@@ -1,4 +1,4 @@
-package com.wsr.plugins.koin
+package com.wsr.integration
 
 import DatabaseWrapper
 import article.ArticleRepositoryImpl
@@ -18,18 +18,18 @@ import comment.create.CreateReplyUseCase
 import comment.create.CreateReplyUseCaseImpl
 import comment.get.GetCommentUseCase
 import comment.get.GetCommentUseCaseImpl
-import dev.DevDatabase
 import entities.article.ArticleRepository
 import entities.comment.CommentRepository
 import entities.comment.ReplyRepository
 import io.ktor.application.*
 import org.koin.dsl.module
 import org.koin.ktor.ext.Koin
+import com.wsr.integration.testdb.TestDatabase
 
-fun Application.configureKoin() {
-
+fun Application.testDiModule() {
     val module = module {
         /*** UseCase ***/
+
         //Article
         single<GetArticleUseCase> { GetArticleUseCaseImpl(get()) }
         single<CreateArticleUseCase> { CreateArticleUseCaseImpl(get()) }
@@ -50,7 +50,7 @@ fun Application.configureKoin() {
         single<ReplyRepository> { ReplyRepositoryImpl(get()) }
 
         /*** Database ***/
-        single<DatabaseWrapper> { DevDatabase }
+        single<DatabaseWrapper> { TestDatabase }
     }
 
     install(Koin) {
