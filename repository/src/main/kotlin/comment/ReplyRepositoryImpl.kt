@@ -16,7 +16,7 @@ import state.State
 import table.ReplyModel
 import utils.UniqueId
 
-class ReplyRepositoryImpl(databaseWrapper: DatabaseWrapper) : ReplyRepository{
+class ReplyRepositoryImpl(databaseWrapper: DatabaseWrapper) : ReplyRepository {
 
     private val database = databaseWrapper.instance
 

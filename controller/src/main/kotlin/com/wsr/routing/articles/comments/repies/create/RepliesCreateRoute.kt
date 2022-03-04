@@ -1,8 +1,8 @@
-package com.wsr.routing.articles.comments.create
+package com.wsr.routing.articles.comments.repies.create
 
-import com.wsr.routing.articles.comments.CommentSerializable.Companion.toSerializable
 import com.wsr.routing.articles.comments.CommentsCreateRequest
-import comment.create.CreateCommentUseCase
+import com.wsr.routing.articles.comments.ReplySerializable.Companion.toSerializable
+import comment.create.CreateReplyUseCase
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
@@ -12,15 +12,14 @@ import org.koin.ktor.ext.inject
 import state.consume
 import state.map
 
-fun Route.commentsCreateRoute() {
+fun Route.repliesCreateRoute() {
 
-    val createCommentUseCase by inject<CreateCommentUseCase>()
-
+    val createReplyUseCase by inject<CreateReplyUseCase>()
 
     post {
-        val articleId = call.parameters["article_id"] ?: return@post run { call.respond(HttpStatusCode.BadRequest) }
+        val commentId = call.parameters["comment_id"] ?: return@post run { call.respond(HttpStatusCode.BadRequest) }
         val (body) = call.receive<CommentsCreateRequest>()
-        createCommentUseCase.create(articleId, body)
+        createReplyUseCase.create(commentId, body)
             .map { it.toSerializable() }
             .consume(
                 success = { call.respond(HttpStatusCode.OK, it) },

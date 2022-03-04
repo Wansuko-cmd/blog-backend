@@ -8,7 +8,6 @@ import entities.article.ArticleRepository
 import entities.article.ArticleTitle
 import exceptions.CreateDataFailedException
 import state.State
-import state.map
 import state.onSuccess
 import utils.ImagePath
 

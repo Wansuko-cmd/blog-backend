@@ -18,12 +18,6 @@ inline fun <T, E, NT> State<T, E>.map(block: (T) -> NT): State<NT, E> = when (th
     is State.Empty -> this
 }
 
-inline fun <T, E, NT, NE> State<T, E>.mapBoth(success: (T) -> NT, failure: (E) -> NE): State<NT, NE> = when (this) {
-    is State.Success -> State.Success(success(value))
-    is State.Failure -> State.Failure(failure(value))
-    is State.Empty -> this
-}
-
 inline fun <T, E, NT> State<T, E>.flatMap(block: (T) -> State<NT, E>): State<NT, E> = when (this) {
     is State.Success -> block(value)
     is State.Failure -> this

@@ -1,4 +1,4 @@
-package com.wsr.routing.articles.comments.create
+package com.wsr.routing.articles.comments
 
 import kotlinx.serialization.Serializable
 

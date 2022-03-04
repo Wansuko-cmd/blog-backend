@@ -22,7 +22,7 @@ class CommentRepositoryImpl(databaseWrapper: DatabaseWrapper) : CommentRepositor
 
     override suspend fun getAllByArticleId(articleId: UniqueId): State<List<Comment>, GetDataFailedException> = try {
         transaction(database) {
-            CommentModel.select { CommentModel.articleId eq articleId.value}
+            CommentModel.select { CommentModel.articleId eq articleId.value }
                 .map { it.toComment() }
                 .let { State.Success(it) }
         }

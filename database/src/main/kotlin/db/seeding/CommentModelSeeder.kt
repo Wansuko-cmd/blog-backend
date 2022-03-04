@@ -10,7 +10,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import table.CommentModel
 import utils.UniqueId
 
-object CommentModelSeeder : DatabaseSeeder{
+object CommentModelSeeder : DatabaseSeeder {
     override fun seeding(database: Database) {
         transaction(database) {
             CommentModel.batchInsert(commentData) {

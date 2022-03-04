@@ -2,7 +2,6 @@ package comment.get
 
 import comment.CommentUseCaseModel
 import comment.CommentUseCaseModel.Companion.toUseCaseModel
-import comment.ReplyUseCaseModel.Companion.toUseCaseModel
 import entities.comment.Comment
 import entities.comment.CommentRepository
 import entities.comment.Reply
@@ -21,10 +20,10 @@ class GetCommentUseCaseImpl(
     override suspend fun getAllByArticleId(articleId: String): State<List<CommentUseCaseModel>, GetDataFailedException> =
         commentRepository.getAllByArticleId(UniqueId(articleId))
             .flatMap { comments ->
-                comments.map { comment -> comment.withReply().map{ it.toUseCaseModel() } }
+                comments.map { comment -> comment.withReply().map { it.toUseCaseModel() } }
                     .sequence()
             }
 
     private suspend fun Comment.withReply(): State<Pair<Comment, List<Reply>>, GetDataFailedException> =
-        replyRepository.getAllByCommentId(this.id).map { replies ->  this to replies }
+        replyRepository.getAllByCommentId(this.id).map { replies -> this to replies }
 }

@@ -3,34 +3,20 @@ package dev
 import DatabaseWrapper
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import db.seeding.ArticleModelSeeder
-import db.seeding.CommentModelSeeder
-import db.seeding.ReplyModelSeeder
-import org.flywaydb.core.Flyway
+import db.migrate
+import db.seeding
 import org.jetbrains.exposed.sql.Database
-import javax.sql.DataSource
 
 val DevDatabase: DatabaseWrapper by lazy {
+
     val pool = hikari()
-    val database = Database.connect(pool)
-
-    migrate(pool)
-    seeding.forEach { it.seeding(database) }
-
-    DatabaseWrapper(database)
+    Database.connect(pool)
+        .also { pool.migrate() }
+        .apply { seeding() }
+        .let { DatabaseWrapper(it) }
 }
 
 
-val seeding = listOf(ArticleModelSeeder, CommentModelSeeder, ReplyModelSeeder)
-
-private fun migrate(dataSource: DataSource) {
-    val flyway = Flyway.configure()
-        .dataSource(dataSource)
-        .load()
-
-    flyway.info()
-    flyway.migrate()
-}
 
 private fun hikari(): HikariDataSource {
     val config = HikariConfig().apply {
