@@ -18,15 +18,18 @@ data class Article(
         thumbnailPath: ImagePath?,
         title: ArticleTitle? = null,
         body: ArticleBody? = null,
-        goodCount: GoodCount? = null,
-    ) = Article(
-        id = this.id,
+    ) = this.copy(
         thumbnailPath = thumbnailPath,
         title = title ?: this.title,
         body = body ?: this.body,
-        goodCount = goodCount ?: this.goodCount,
-        createdAt = createdAt,
         modifiedAt = LocalDateTime.now()
+    )
+
+    fun modify(
+        goodCount: GoodCount
+    ) = this.copy(
+        goodCount = goodCount,
+        modifiedAt = LocalDateTime.now(),
     )
 }
 
@@ -34,4 +37,6 @@ data class ArticleTitle(val value: String)
 
 data class ArticleBody(val value: String)
 
-data class GoodCount(val value: Int = 0)
+data class GoodCount(val value: Int = 0) {
+    fun add() = GoodCount(value + 1)
+}

@@ -11,4 +11,6 @@ interface UpdateArticleUseCase {
         title: String,
         body: String,
     ): State<ArticleUseCaseModel, UpdateDataFailedException>
+
+    suspend fun updateGoodCount(id: String): State<ArticleUseCaseModel, UpdateDataFailedException>
 }

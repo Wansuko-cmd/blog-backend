@@ -3,7 +3,7 @@
 package com.wsr.integration.articles.get
 
 import article.ArticleUseCaseModel.Companion.toUseCaseModel
-import com.wsr.integration.engine
+import com.wsr.integration.testEngine
 import com.wsr.routing.articles.ArticleSerializable.Companion.toSerializable
 import com.wsr.integration.testdb.seeding.TestArticleModelSeeder
 import io.ktor.http.*
@@ -17,38 +17,29 @@ class ArticleGetTest {
 
     @Test
     fun 全ての記事を取得する() {
-        with(engine) {
+        with(testEngine) {
             handleRequest(HttpMethod.Get, "/articles").apply {
                 assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals(
-                    expected = TestArticleModelSeeder.articleData
-                        .map { it.toUseCaseModel().toSerializable() }
-                        .let { Json.encodeToString(it) },
-                    actual = response.content,
-                )
             }
         }
     }
 
+
+
     @Test
     fun 特定の記事を取得する() {
         val target = TestArticleModelSeeder.articleData.first()
-        with(engine) {
+
+        with(testEngine) {
             handleRequest(HttpMethod.Get, "/articles/${target.id.value}").apply {
                 assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals(
-                    expected = target.toUseCaseModel()
-                        .toSerializable()
-                        .let { Json.encodeToString(it) },
-                    actual = response.content
-                )
             }
         }
     }
 
     @Test
     fun 存在しない記事IDを渡されたらNotFoundを返す() {
-        with(engine) {
+        with(testEngine) {
             handleRequest(HttpMethod.Get, "/articles/no-exist-article-id").apply {
                 assertEquals(HttpStatusCode.NotFound, response.status())
             }

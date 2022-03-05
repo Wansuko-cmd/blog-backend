@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ArticleSerializable(
     val id: String,
-    val thumbnailPath: String?,
+    @SerialName("thumbnail_path") val thumbnailPath: String?,
     val title: String,
     val body: String,
     @SerialName("good_count") val goodCount: Int,

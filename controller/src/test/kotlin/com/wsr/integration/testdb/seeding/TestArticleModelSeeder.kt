@@ -29,7 +29,7 @@ object TestArticleModelSeeder : DatabaseSeeder {
         }
     }
 
-    private val time = LocalDateTime.parse("2005-05-05T15:00:00")
+    private val time = LocalDateTime.parse("2005-05-05T15:00")
 
     val articleData = listOf(
         Article(

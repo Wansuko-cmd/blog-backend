@@ -12,3 +12,14 @@
 | /articles/{article_id}/comments/{comment_id}/replies | POST   | 特定のコメントの返信を作成       | 
 
 https://notepm.jp/markdown-table-tool
+
+
+           {
+                "id" : "articleId1",
+                "thumbnail_path" : "Thumbnail1",
+                "title" : "Title1",
+                "body" : "Body1",
+                "good_count" : 1,
+                "created_at" : "2005-05-05T15:00",
+                "modified_at" : "2005-05-05T15:00"
+            }

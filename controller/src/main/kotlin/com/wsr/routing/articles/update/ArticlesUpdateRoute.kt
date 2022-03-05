@@ -15,9 +15,21 @@ fun Route.articlesUpdateRoute() {
 
     val updateArticleUseCase by inject<UpdateArticleUseCase>()
 
-    put {
-        val (id, thumbnail, title, body) = call.receive<ArticlesUpdateRequest>()
+    put("{article_id}") {
+        val id = call.parameters["article_id"] ?: return@put run { call.respond(HttpStatusCode.BadRequest) }
+        val (thumbnail, title, body) = call.receive<ArticlesUpdateRequest>()
         updateArticleUseCase.update(id, thumbnail, title, body)
+            .map { it.toSerializable() }
+            .consume(
+                success = { call.respond(HttpStatusCode.OK, it) },
+                failure = { call.respond(HttpStatusCode.InternalServerError, it) },
+                empty = { call.respond(HttpStatusCode.NotFound) },
+            )
+    }
+
+    put("{article_id}/good-count") {
+        val id = call.parameters["article_id"] ?: return@put run { call.respond(HttpStatusCode.BadRequest) }
+        updateArticleUseCase.updateGoodCount(id)
             .map { it.toSerializable() }
             .consume(
                 success = { call.respond(HttpStatusCode.OK, it) },
